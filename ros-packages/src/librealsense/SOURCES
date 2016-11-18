@@ -1,0 +1,4 @@
+git://git.launchpad.net/~ubuntu-kernel-test/ubuntu/+source/linux/+git/mainline-crack v4.4 afd2ff9b7e1b367172f18ba7f693dfb62bdcb2dc
+0001-base-packaging.patch
+0002-debian-changelog.patch
+0003-configs-based-on-Ubuntu-4.4.0-0.10.patch

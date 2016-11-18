@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Export-Package: realsense_camera;version="1.0.0";uses:="org.jboss.nett
+ y.buffer,org.ros.internal.message"
+Bundle-Version: 1.0.0
+Tool: Bnd-2.1.0.20130426-122213
+Bundle-Name: realsense_camera
+Bnd-LastModified: 1479431402000
+Created-By: 1.7.0_60 (Oracle Corporation)
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: org.ros.rosjava_messages.realsense_camera
+Import-Package: org.jboss.netty.buffer;version="[3.5,4)",org.ros.inter
+ nal.message
+
