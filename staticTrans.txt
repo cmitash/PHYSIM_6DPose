@@ -1,0 +1,11 @@
+<node pkg="tf" type="static_transform_publisher" name="realsense_broadcaster" args = "-0.06 -0.03 0.06 0 0 0 1 right_RGB_camera realsense 0.001" />
+
+<node pkg="tf" type="static_transform_publisher" name="realsense_broadcaster1" args = "0.0781315 -0.00471067 -0.0137971 0.00345093 -0.0654327 -0.0654327 0.99361 realsense realsense1 0.001" />
+
+<node pkg="tf" type="static_transform_publisher" name="realsense_broadcaster2" args = "-0.0557473 -0.0629139 0.0361096 -0.0416625 0.0403958 0.171392 0.983495 realsense1 realsense2 0.001" />
+
+<node pkg="tf" type="static_transform_publisher" name="realsense_broadcaster3" args = "0.0392429 0.0596305 0.00113666 0.0409068 -0.0509331 -0.0116944 0.997799 realsense2 realsense3 0.001" />
+
+<node pkg="tf" type="static_transform_publisher" name="realsense_broadcaster4" args = "-0.0654941 -0.00687062 0.0103232 -0.0161986 0.0622717 -0.077294 0.994932 realsense3 realsense4 0.001" />
+
+<node pkg="tf" type="static_transform_publisher" name="realsense_broadcaster5" args = "0.0148824 0.0198891 0.00337815 0.0139259 -0.0170693 -0.00310714 0.999753 realsense4 realsense5 0.001" />

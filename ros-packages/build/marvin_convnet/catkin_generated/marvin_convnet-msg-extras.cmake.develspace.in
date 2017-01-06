@@ -1,2 +1,0 @@
-set(marvin_convnet_MESSAGE_FILES "")
-set(marvin_convnet_SERVICE_FILES "/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/marvin_convnet/srv/DetectObjects.srv")
