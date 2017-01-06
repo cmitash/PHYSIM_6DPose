@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../3rdparty/chealpix/include/chealpix.h
+
+/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/super4pcs/3rdparty/chealpix/src/chealpix.c
+stdio.h
+-
+stdlib.h
+-
+string.h
+-
+math.h
+-
+fitsio.h
+/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/super4pcs/3rdparty/chealpix/src/fitsio.h
+chealpix.h
+/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/super4pcs/3rdparty/chealpix/src/chealpix.h
+

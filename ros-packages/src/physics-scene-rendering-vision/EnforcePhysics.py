@@ -10,7 +10,6 @@ import os, tempfile, glob, shutil
 import math
 import random
 import time
-import numpy as np
 import socket
 from mathutils import Vector
 from mathutils import Matrix
@@ -64,7 +63,7 @@ objects = bpy.data.objects
 bpy.ops.object.select_by_type(type='LAMP')
 bpy.ops.object.delete(use_global=False)
 bpy.context.scene.world.light_settings.use_environment_light = True
-bpy.context.scene.world.light_settings.environment_energy = np.random.uniform(g_syn_light_environment_energy_lowbound, 
+bpy.context.scene.world.light_settings.environment_energy = random.uniform(g_syn_light_environment_energy_lowbound, 
                                                                                 g_syn_light_environment_energy_highbound)
 bpy.context.scene.world.light_settings.environment_color = 'PLAIN'
 
@@ -85,7 +84,7 @@ for obj_file_name in object_file_list:
 # SHELF BASE
 loc = [0,0,0]
 bpy.ops.mesh.primitive_cube_add(location=loc)
-bpy.context.object.dimensions = [0.43, 0.28, 0.1]
+bpy.context.object.dimensions = [0.43, 0.28, 0.2]
 scene.objects.active = bpy.context.object
 bpy.ops.rigidbody.object_add(type='ACTIVE')
 bpy.ops.object.modifier_add(type = 'COLLISION')
@@ -96,7 +95,7 @@ bpy.context.object.rigid_body.collision_margin = 0
 # SHELF LEFT
 loc = [0,0,0]
 bpy.ops.mesh.primitive_cube_add(location=loc)
-bpy.context.object.dimensions = [0.43, 0.01, 0.22]
+bpy.context.object.dimensions = [0.43, 0.01, 0.24]
 scene.objects.active = bpy.context.object
 bpy.ops.rigidbody.object_add(type='ACTIVE')
 bpy.ops.object.modifier_add(type = 'COLLISION')
@@ -107,7 +106,7 @@ bpy.context.object.rigid_body.collision_margin = 0
 # SHELF RIGHT
 loc = [0,0,0]
 bpy.ops.mesh.primitive_cube_add(location=loc)
-bpy.context.object.dimensions = [0.43, 0.01, 0.22]
+bpy.context.object.dimensions = [0.43, 0.01, 0.24]
 scene.objects.active = bpy.context.object
 bpy.ops.rigidbody.object_add(type='ACTIVE')
 bpy.ops.object.modifier_add(type = 'COLLISION')
@@ -118,7 +117,7 @@ bpy.context.object.rigid_body.collision_margin = 0
 # SHELF BACK
 loc = [0,0,0]
 bpy.ops.mesh.primitive_cube_add(location=loc)
-bpy.context.object.dimensions = [0.01, 0.28, 0.22]
+bpy.context.object.dimensions = [0.01, 0.28, 0.24]
 scene.objects.active = bpy.context.object
 bpy.ops.rigidbody.object_add(type='ACTIVE')
 bpy.ops.object.modifier_add(type = 'COLLISION')
@@ -136,15 +135,23 @@ sock.bind(server_address)
 # Listen for incoming connections
 sock.listen(1)
 
+iter_num = 1
+framesIter = 5
+
 while True:
     # Wait for a connection
     print('waiting for a connection')
     connection, client_address = sock.accept()
 
     # Receive the data in small chunks and retransmit it
-    data = connection.recv(16)
+    data = connection.recv(4)
     print('received %s' % data)
+    framesIter = int(data)
+    print('received int %d' % framesIter)
     connection.close()
+
+    if os.path.exists(final_pose_file):
+        os.remove(final_pose_file)
 
     num = 0
 
@@ -176,7 +183,7 @@ while True:
     objects['Camera'].rotation_mode = 'QUATERNION'
     objects['Camera'].rotation_quaternion = cam_rotation
 
-    objects["Cube"].location = [sloc[0] +0.215, sloc[1], sloc[2] - 0.05]
+    objects["Cube"].location = [sloc[0] +0.215, sloc[1], sloc[2] - 0.11]
     objects["Cube.001"].location = [sloc[0] +0.215, sloc[1] - 0.145, sloc[2] + 0.11]
     objects["Cube.002"].location = [sloc[0] +0.215, sloc[1] + 0.145, sloc[2] + 0.11]
     objects["Cube.003"].location = [sloc[0] + 0.435, sloc[1], sloc[2] + 0.11]
@@ -226,31 +233,33 @@ while True:
     bpy.context.scene.frame_set(1)
 
     #Rendering settings
-    # for area in bpy.context.screen.areas:
-    #     if area.type == 'VIEW_3D':
-    #         area.spaces[0].region_3d.view_perspective = 'CAMERA'
-    #         for space in area.spaces:
-    #             if space.type == 'VIEW_3D':
-    #                 space.viewport_shade = 'TEXTURED'
+    for area in bpy.context.screen.areas:
+        if area.type == 'VIEW_3D':
+            area.spaces[0].region_3d.view_perspective = 'CAMERA'
+            for space in area.spaces:
+                if space.type == 'VIEW_3D':
+                    space.viewport_shade = 'TEXTURED'
         
     
-    # output_img = "rendered_images/Pre_image_%05i.png" % 1
-    # scene.render.filepath = os.path.join("/home/pracsys/github/physics-scene-rendering-vision/", output_img) 
+    # output_img = "rendered_images/Pre_image_%05i.png" % iter_num
+    # scene.render.filepath = os.path.join("/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/physics-scene-rendering-vision/", output_img) 
     # bpy.ops.render.render(write_still=True)
 
-    for i in range(2,11):
+    framesIter = int(framesIter)
+    for i in range(2,framesIter):
         bpy.context.scene.frame_set(i)
 
     #Render Post Image
-    # output_img = "rendered_images/Post_image_%05i.png" % 1
-    # scene.render.filepath = os.path.join("/home/pracsys/github/physics-scene-rendering-vision/", output_img) 
+    # output_img = "rendered_images/Post_image_%05i.png" % iter_num
+    # scene.render.filepath = os.path.join("/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/physics-scene-rendering-vision/", output_img) 
     # bpy.ops.render.render(write_still=True)
 
+    
     for i in range(0, numberOfObjects):
         index = selectedobj[i]
         shape_file = sceneobjectlist[index]
         with open(final_pose_file, "a+") as file:
-            file.write("%s %f %f %f %f %f %f %f %f %f %f %f %f\n" % ( pose_list[i][0],
+            file.write("%s %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f\n" % ( pose_list[i][0],
                                             objects[shape_file].matrix_world[0][0], 
                                             objects[shape_file].matrix_world[0][1],
                                             objects[shape_file].matrix_world[0][2],
@@ -262,14 +271,18 @@ while True:
                                             objects[shape_file].matrix_world[2][0],
                                             objects[shape_file].matrix_world[2][1], 
                                             objects[shape_file].matrix_world[2][2],
-                                            objects[shape_file].matrix_world[2][3]))
+                                            objects[shape_file].matrix_world[2][3],
+                                            sloc[0], sloc[1], sloc[2]))
 
     
 
     # save to temp.blend
-    # mainfile_path = os.path.join("rendered_images", "blend_%05d.blend" % 1)
+    # mainfile_path = os.path.join("rendered_images", "blend_%05d.blend" % iter_num)
     # bpy.ops.file.autopack_toggle()
     # bpy.ops.wm.save_as_mainfile(filepath=mainfile_path)
+
+    iter_num = iter_num + 1
+    # framesIter = framesIter/2
 
     # Create a TCP/IP socket
     sock2 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -277,7 +290,7 @@ while True:
     # Connect the socket to the port where the server is listening
     serv_address = ('localhost', 40000)
     sock2.connect(serv_address)
-    sock2.sendall(b'helloFromPy')
+    sock2.sendall(b'hi')
     sock2.close()
         
 

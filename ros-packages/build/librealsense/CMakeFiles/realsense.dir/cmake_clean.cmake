@@ -1,0 +1,40 @@
+file(REMOVE_RECURSE
+  "CMakeFiles/realsense.dir/src/archive.cpp.o"
+  "CMakeFiles/realsense.dir/src/context.cpp.o"
+  "CMakeFiles/realsense.dir/src/device.cpp.o"
+  "CMakeFiles/realsense.dir/src/ds-device.cpp.o"
+  "CMakeFiles/realsense.dir/src/ds-private.cpp.o"
+  "CMakeFiles/realsense.dir/src/f200.cpp.o"
+  "CMakeFiles/realsense.dir/src/hw-monitor.cpp.o"
+  "CMakeFiles/realsense.dir/src/image.cpp.o"
+  "CMakeFiles/realsense.dir/src/ivcam-private.cpp.o"
+  "CMakeFiles/realsense.dir/src/ivcam-device.cpp.o"
+  "CMakeFiles/realsense.dir/src/log.cpp.o"
+  "CMakeFiles/realsense.dir/src/motion-module.cpp.o"
+  "CMakeFiles/realsense.dir/src/r200.cpp.o"
+  "CMakeFiles/realsense.dir/src/rs.cpp.o"
+  "CMakeFiles/realsense.dir/src/sr300.cpp.o"
+  "CMakeFiles/realsense.dir/src/stream.cpp.o"
+  "CMakeFiles/realsense.dir/src/sync.cpp.o"
+  "CMakeFiles/realsense.dir/src/timestamps.cpp.o"
+  "CMakeFiles/realsense.dir/src/types.cpp.o"
+  "CMakeFiles/realsense.dir/src/uvc-libuvc.cpp.o"
+  "CMakeFiles/realsense.dir/src/uvc-v4l2.cpp.o"
+  "CMakeFiles/realsense.dir/src/uvc-wmf.cpp.o"
+  "CMakeFiles/realsense.dir/src/uvc.cpp.o"
+  "CMakeFiles/realsense.dir/src/verify.c.o"
+  "CMakeFiles/realsense.dir/src/zr300.cpp.o"
+  "CMakeFiles/realsense.dir/src/libuvc/ctrl.c.o"
+  "CMakeFiles/realsense.dir/src/libuvc/dev.c.o"
+  "CMakeFiles/realsense.dir/src/libuvc/diag.c.o"
+  "CMakeFiles/realsense.dir/src/libuvc/frame.c.o"
+  "CMakeFiles/realsense.dir/src/libuvc/init.c.o"
+  "CMakeFiles/realsense.dir/src/libuvc/stream.c.o"
+  "/home/pracsys/github/PHYSIM_6DPose/ros-packages/devel/lib/librealsense.pdb"
+  "/home/pracsys/github/PHYSIM_6DPose/ros-packages/devel/lib/librealsense.so"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang C CXX)
+  include(CMakeFiles/realsense.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()

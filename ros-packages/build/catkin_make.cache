@@ -1,0 +1,2 @@
+detection_package:librealsense:marvin_convnet:pose_estimation:realsense_camera
+-DCATKIN_DEVEL_PREFIX=/home/pracsys/github/PHYSIM_6DPose/ros-packages/devel -DCMAKE_INSTALL_PREFIX=/home/pracsys/github/PHYSIM_6DPose/ros-packages/install -G Unix Makefiles

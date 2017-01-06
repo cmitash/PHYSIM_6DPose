@@ -118,12 +118,8 @@ def im_detect(net, im, boxes=None):
             background as object category 0)
         boxes (ndarray): R x (4*K) array of predicted bounding boxes
     """
-    print "in im_detect"
-
-    print "gpu cfg done"
     blobs, im_scales = _get_blobs(im, boxes)
 
-    print "blobs done"
     # When mapping from image ROIs to feature map ROIs, there's some aliasing
     # (some distinct image ROIs get mapped to the same feature ROI).
     # Here, we identify duplicate feature ROIs, so we only compute features
@@ -136,7 +132,6 @@ def im_detect(net, im, boxes=None):
         blobs['rois'] = blobs['rois'][index, :]
         boxes = boxes[index, :]
 
-    print "boxes done"
     if cfg.TEST.HAS_RPN:
         im_blob = blobs['data']
         blobs['im_info'] = np.array(
@@ -150,7 +145,6 @@ def im_detect(net, im, boxes=None):
     else:
         net.blobs['rois'].reshape(*(blobs['rois'].shape))
 
-    print "reshape done"
     # do forward
     forward_kwargs = {'data': blobs['data'].astype(np.float32, copy=False)}
     if cfg.TEST.HAS_RPN:
@@ -158,10 +152,7 @@ def im_detect(net, im, boxes=None):
     else:
         forward_kwargs['rois'] = blobs['rois'].astype(np.float32, copy=False)
 
-
-
     blobs_out = net.forward(**forward_kwargs)
-    print "forward done"
 
     if cfg.TEST.HAS_RPN:
         assert len(im_scales) == 1, "Only single-image batch implemented"
@@ -192,7 +183,6 @@ def im_detect(net, im, boxes=None):
         pred_boxes = pred_boxes[inv_index, :]
 
     #print scores
-    print "out of im_detect"
     return scores, pred_boxes
 
 def vis_detections(im, class_name, dets, thresh=0.3):

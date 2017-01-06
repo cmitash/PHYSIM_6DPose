@@ -21,11 +21,7 @@ function scenePointCloud = getScenePointCloud(sceneData,gridStep)
 % ---------------------------------------------------------
 
 % Define view bounds of tote and bin in their coordinate system
-if strcmp(sceneData.env,'tote')
-  viewBounds = [-0.3, 0.3; -0.4, 0.4; -0.05, 0.2];
-else
-  viewBounds = [-0.01, 0.40; -0.17, 0.17; -0.06, 0.20];
-end
+viewBounds = [-0.01, 0.40; -0.17, 0.17; -0.06, 0.20];
 
 if ~exist('gridStep','var')
     gridStep = 0.001;

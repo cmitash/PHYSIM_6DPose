@@ -13,6 +13,8 @@ g_blank_blend_file_path = 'blank.blend'
 
 # call blender to correct poses
 blank_file = osp.join(g_blank_blend_file_path)
+# pose_correct_code = osp.join('visualize.py')
+# pose_correct_code = osp.join('ComputeGradient.py')
 pose_correct_code = osp.join('EnforcePhysics.py')
 temp_dirname = tempfile.mkdtemp()
 

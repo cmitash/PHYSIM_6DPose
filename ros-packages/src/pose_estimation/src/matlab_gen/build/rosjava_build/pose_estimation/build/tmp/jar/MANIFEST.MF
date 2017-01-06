@@ -4,7 +4,7 @@ Export-Package: pose_estimation;version="1.0.0";uses:="geometry_msgs,o
 Bundle-Version: 1.0.0
 Tool: Bnd-2.1.0.20130426-122213
 Bundle-Name: pose_estimation
-Bnd-LastModified: 1479431402000
+Bnd-LastModified: 1482259808000
 Created-By: 1.7.0_60 (Oracle Corporation)
 Bundle-ManifestVersion: 2
 Bundle-SymbolicName: org.ros.rosjava_messages.pose_estimation

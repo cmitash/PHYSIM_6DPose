@@ -1,0 +1,1 @@
+/usr/bin/cc  -fPIC -O3 -DNDEBUG  -shared -Wl,-soname,libchealpix.so -o libchealpix.so CMakeFiles/chealpix.dir/src/chealpix.c.o -lcfitsio 

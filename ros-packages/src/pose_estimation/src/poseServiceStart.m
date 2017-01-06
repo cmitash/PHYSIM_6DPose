@@ -9,6 +9,11 @@ if ~exist('rosgenmsg')
     return;
 end
 addpath('matlab_gen/msggen');
+addpath('Utilities');
+addpath('removebackground');
+addpath('initializePose');
+addpath('optimizePhysics');
+addpath('segmentation');
 
 % Start Matlab ROS
 try
@@ -64,12 +69,12 @@ objModels = cell(1,length(objNames));
 fprintf('Loading pre-scanned object models...\n');
 for objIdx = 1:length(objNames)
   try
-    objModels{objIdx} = pcread(sprintf('models/objects/%s.ply',objNames{objIdx}));
     fprintf('    %s\n',objNames{objIdx});
+    objModels{objIdx} = pcread(sprintf('models/objects/%s.ply',objNames{objIdx}));
   end
 end
 
-% Load pre-scanned empty tote and shelf bins
+% Load pre-scanned empty shelf bins
 global emptyShelfModels;
 emptyShelfModels = cell(1,12);
 binIds = 'ABCDEFGHIJKL';
@@ -86,5 +91,5 @@ KNNSearchGPU = parallel.gpu.CUDAKernel('KNNSearch.ptx','KNNSearch.cu');
 toc;
 
 % Start ROS service
-server = rossvcserver('/pose_estimation', 'pose_estimation/EstimateObjectPose', @poseService);
+server = rossvcserver('/pose_estimation', 'pose_estimation/EstimateObjectPose', @poseServiceIterative);
 fprintf('Ready.\n');

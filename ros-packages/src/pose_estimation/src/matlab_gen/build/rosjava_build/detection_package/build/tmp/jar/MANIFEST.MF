@@ -4,7 +4,7 @@ Export-Package: detection_package;version="0.0.0";uses:="org.ros.inter
 Bundle-Version: 0.0.0
 Tool: Bnd-2.1.0.20130426-122213
 Bundle-Name: detection_package
-Bnd-LastModified: 1479431400000
+Bnd-LastModified: 1482259807000
 Created-By: 1.7.0_60 (Oracle Corporation)
 Bundle-ManifestVersion: 2
 Bundle-SymbolicName: org.ros.rosjava_messages.detection_package
