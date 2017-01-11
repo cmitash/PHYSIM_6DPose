@@ -1,7 +1,7 @@
 function getRCNNSegmentation(sceneData, scenePath, tmpDataPath, apc_objects_strs, frames, numFrames)
 
 % if you want to use background calibration (default = false)
-useBgCalib = 0;
+useBgCalib = 1;
 
 % grid size for downsampling point clouds
 gridStep = 0.002;
@@ -45,7 +45,7 @@ for obIdx = 1:size(sceneData.objects,2)
         file = fopen(fullfile(tmpDataPath,'bbox_detections',scoreFiles(frameIdx).name),'r');
         score = fscanf(file,'%f');
         fclose(file);
-        if score > 0.0
+        if score > 0.3
             tmpObjMask = objMasks{frameIdx};
             tmpDepth = sceneData.depthFrames{frameIdx};
             color = sceneData.colorFrames{frameIdx};

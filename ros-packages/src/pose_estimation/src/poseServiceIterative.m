@@ -72,6 +72,8 @@ end
 
 % Call Segmentaion module
 getRCNNSegmentation(sceneData, scenePath, tmpDataPath, apc_objects_strs, frames, numFrames);
+% getFCNSegmentation(sceneData, scenePath, tmpDataPath, apc_objects_strs, frames, numFrames);
+% getGTBBoxSegmentation(sceneData, scenePath, tmpDataPath, apc_objects_strs, frames, numFrames, objNames);
 
 % Get Initial Pairwise registrarion
 allfp = fopen(allInitPose, 'wt');

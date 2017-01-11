@@ -1,2 +1,0 @@
-/usr/bin/ar cq libsuper4pcs_accel.a  CMakeFiles/super4pcs_accel.dir/normalHealSet.cpp.o
-/usr/bin/ranlib libsuper4pcs_accel.a

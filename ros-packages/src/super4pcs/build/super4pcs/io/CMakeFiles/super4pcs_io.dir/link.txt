@@ -1,2 +1,0 @@
-/usr/bin/ar cq libsuper4pcs_io.a  CMakeFiles/super4pcs_io.dir/io.cc.o
-/usr/bin/ranlib libsuper4pcs_io.a

@@ -2,11 +2,11 @@
 
 Methods you can chose from :-
 
-Object segmentation : RCNN, PHYSIM-RCNN (Self-Supervised), FCN 
+Object segmentation : RCNN, PHYSIM-RCNN (Self-Supervised), FCN
 
 Point Cloud registration : PCA, Super4PCS
 
-Post-processing : ICP, Physics correction, PhyTrim ICP (Physics-ICP iterative reasoning) 
+Post-processing : ICP, Physics correction, PhyTrim ICP (Physics-ICP iterative reasoning)
 
 Installation :-
 
@@ -38,11 +38,8 @@ Basic Usage :-
 
 4) rosrun marvin_convnet save_images _write_directory:="path-to-some-tmp-directory" _camera_service_name:="/realsense_camera"
 
-5) rosservice call /save_images ["expo_dry_erase_board_eraser","other-object-names"] binId frameId
-(for table top you can use 13 as the bin id, and for shelf from 1-12)
+5) rosservice call /save_images ["expo_dry_erase_board_eraser","other-object-names"] binId frameId (for table top you can use 13 as the bin id, and for shelf from 1-12)
 
-6) rosservice call /pose_estimation "path-to-tmp-directory" "path-to-calibration-folder" 
-
-
+6) rosservice call /pose_estimation "path-to-tmp-directory" "path-to-calibration-folder"
 
 more details coming soon...

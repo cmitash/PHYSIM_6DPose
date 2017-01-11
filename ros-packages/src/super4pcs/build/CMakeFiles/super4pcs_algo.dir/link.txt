@@ -1,2 +1,0 @@
-/usr/bin/ar cq libsuper4pcs_algo.a  CMakeFiles/super4pcs_algo.dir/super4pcs/4pcs.cc.o CMakeFiles/super4pcs_algo.dir/super4pcs/super4pcs.cc.o
-/usr/bin/ranlib libsuper4pcs_algo.a

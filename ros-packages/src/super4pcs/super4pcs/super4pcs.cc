@@ -776,7 +776,7 @@ MatchSuper4PCSImpl::Verify(const Eigen::Matrix<Scalar, 4, 4>& mat) {
   int terminate_value = best_LCP_ * number_of_points;
 
   Scalar sq_eps = epsilon*epsilon;
-
+  cout<<"points to verify : "<<number_of_points<<std::endl;
   for (int i = 0; i < number_of_points; ++i) {
 
     // Use the kdtree to get the nearest neighbor
@@ -1252,6 +1252,7 @@ void MatchSuper4PCSImpl::Initialize(const std::vector<Point3D>& P,
   if (number_of_trials_ < kMinNumberOfTrials)
     number_of_trials_ = kMinNumberOfTrials;
 
+  number_of_trials_ = 10000;
   //Chaitanya Debug
   std::cout<<"Numer of trials :: "<<number_of_trials_<<std::endl;
 

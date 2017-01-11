@@ -9,9 +9,9 @@ objName = sceneData.objects{obIdx};
 pclname = sprintf('rcnn-clean-%s.ply',objName);
 pclname = fullfile(scenePath, pclname);
 
-modelpath = sprintf('/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/pose_estimation/src/models/objects/%s.ply',objName);
+modelpath = sprintf('/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/super4pcs/objmodels/%s.ply',objName);
 
-command = [pathSuper4PCS ' -i ' pclname ' ' modelpath ' -o 0.7 -d 0.005 -t 30 -n 200 -m ' outputpath];
+command = [pathSuper4PCS ' -i ' pclname ' ' modelpath ' -o 0.7 -d 0.005 -t 20 -n 200 -m ' outputpath];
 
 % Save library paths
 MatlabPath = getenv('LD_LIBRARY_PATH');

@@ -14,6 +14,7 @@ addpath('removebackground');
 addpath('initializePose');
 addpath('optimizePhysics');
 addpath('segmentation');
+addpath('segmentation/getFCNSegmentation');
 
 % Start Matlab ROS
 try

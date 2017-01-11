@@ -1,5 +1,0 @@
-/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/super4pcs/build/3rdparty/chealpix/CMakeFiles/chealpix.dir
-/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/super4pcs/build/CMakeFiles/Super4PCS.dir
-/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/super4pcs/build/super4pcs/accelerators/CMakeFiles/super4pcs_accel.dir
-/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/super4pcs/build/super4pcs/io/CMakeFiles/super4pcs_io.dir
-/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/super4pcs/build/CMakeFiles/super4pcs_algo.dir

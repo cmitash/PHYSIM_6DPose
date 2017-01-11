@@ -37,7 +37,7 @@ double overlap = 0.2;
 // Threshold of the computed overlap for termination. 1.0 means don't terminate
 // before the end.
 //Chaitanya Debug
-double thr = 0.75;
+double thr = 1.0;
 
 // Maximum norm of RGB values between corresponded points. 1e9 means don't use.
 double max_color = 150;
