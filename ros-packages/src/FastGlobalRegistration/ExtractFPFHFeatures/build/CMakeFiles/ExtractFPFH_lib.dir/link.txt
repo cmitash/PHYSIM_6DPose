@@ -1,0 +1,2 @@
+/usr/bin/ar cq libExtractFPFH_lib.a  CMakeFiles/ExtractFPFH_lib.dir/src/ExtractFPFH.cpp.o
+/usr/bin/ranlib libExtractFPFH_lib.a
