@@ -1,8 +1,0 @@
-prefix=/home/pracsys/github/PHYSIM_6DPose/ros-packages/devel
-
-Name: pose_estimation
-Description: Description of pose_estimation
-Version: 1.0.0
-Cflags: -I/home/pracsys/github/PHYSIM_6DPose/ros-packages/devel/include
-Libs: -L/home/pracsys/github/PHYSIM_6DPose/ros-packages/devel/lib 
-Requires: 

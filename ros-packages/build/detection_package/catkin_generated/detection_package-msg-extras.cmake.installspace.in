@@ -1,2 +1,0 @@
-set(detection_package_MESSAGE_FILES "")
-set(detection_package_SERVICE_FILES "srv/UpdateBbox.srv;srv/UpdateActiveListFrame.srv")
