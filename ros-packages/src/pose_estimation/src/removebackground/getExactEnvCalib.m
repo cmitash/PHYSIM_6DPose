@@ -13,8 +13,13 @@ if strcmp(sceneData.env,'shelf')
 	[tform,backgroundPointCloud] = pcregrigidGPU(backgroundPointCloud,scenePointCloud,'InlierRatio',0.8,'MaxIterations',200,'Tolerance',[0.0001,0.0009],'Verbose',false,'Extrapolate',true);
 	extBin2Bg = inv(tform.T');
 else
+	maxDistance = 0.01;
+	referenceVector = [0,0,1];
+	maxAngularDistance = 5;
+	[model1,inlierIndices,outlierIndices] = pcfitplane(scenePointCloud,maxDistance,referenceVector,maxAngularDistance);
+	backgroundPointCloud = select(scenePointCloud,inlierIndices);
+	pcwrite(backgroundPointCloud,fullfile(scenePath,'background'),'PLYFormat','binary');
 	extBin2Bg = 0;
-	backgroundPointCloud = 0;
 end
 
 end

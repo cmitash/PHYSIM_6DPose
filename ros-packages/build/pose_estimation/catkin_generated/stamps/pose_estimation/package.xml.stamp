@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package>
+  <name>pose_estimation</name>
+  <version>1.0.0</version>
+  <description>The pose_estimation package</description>
+  <maintainer email="cm1074@cs.rutgers.edu">Chaitanya Mitash</maintainer>
+  <license>MIT</license>
+    <build_depend>message_generation</build_depend>
+    <build_depend>geometry_msgs</build_depend>
+    <build_depend>std_msgs</build_depend>
+    <run_depend>message_runtime</run_depend>
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>roscpp</build_depend>
+  <run_depend>roscpp</run_depend>
+  <export>
+  </export>
+</package>

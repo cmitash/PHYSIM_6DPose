@@ -206,17 +206,17 @@ int main(int argc, char **argv) {
   }
 
   cout << "Score: " << score << endl;
-  printf("(Homogeneous) Transformation from %s to %s:\n", input2.c_str(),
-         input1.c_str());
-  printf(
-      "\n\n%25.3f %25.3f %25.3f %25.3f\n%25.3f %25.3f %25.3f %25.3f\n%25.3f "
-      "%25.3f %25.3f %25.3f\n%25.3f %25.3f %25.3f %25.3f\n\n",
-      mat.at<double>(0, 0), mat.at<double>(0, 1), mat.at<double>(0, 2),
-      mat.at<double>(0, 3), mat.at<double>(1, 0), mat.at<double>(1, 1),
-      mat.at<double>(1, 2), mat.at<double>(1, 3), mat.at<double>(2, 0),
-      mat.at<double>(2, 1), mat.at<double>(2, 2), mat.at<double>(2, 3),
-      mat.at<double>(3, 0), mat.at<double>(3, 1), mat.at<double>(3, 2),
-      mat.at<double>(3, 3));
+  // printf("(Homogeneous) Transformation from %s to %s:\n", input2.c_str(),
+  //        input1.c_str());
+  // printf(
+  //     "\n\n%25.3f %25.3f %25.3f %25.3f\n%25.3f %25.3f %25.3f %25.3f\n%25.3f "
+  //     "%25.3f %25.3f %25.3f\n%25.3f %25.3f %25.3f %25.3f\n\n",
+  //     mat.at<double>(0, 0), mat.at<double>(0, 1), mat.at<double>(0, 2),
+  //     mat.at<double>(0, 3), mat.at<double>(1, 0), mat.at<double>(1, 1),
+  //     mat.at<double>(1, 2), mat.at<double>(1, 3), mat.at<double>(2, 0),
+  //     mat.at<double>(2, 1), mat.at<double>(2, 2), mat.at<double>(2, 3),
+  //     mat.at<double>(3, 0), mat.at<double>(3, 1), mat.at<double>(3, 2),
+  //     mat.at<double>(3, 3));
 
 
   if(! outputMat.empty() ){
@@ -229,18 +229,18 @@ int main(int argc, char **argv) {
 
 
   
-  if (! output.empty() ){
-      std::cout << "Exporting Registered geometry to "
-                << output.c_str()
-                << "..." << std::flush;
-      iomananger.WriteObject((char *)output.c_str(),
-                             set2,
-                             tex_coords2,
-                             normals2,
-                             tris2,
-                             mtls2);
-      std::cout << "DONE" << std::endl;
-  }
+  // if (! output.empty() ){
+  //     std::cout << "Exporting Registered geometry to "
+  //               << output.c_str()
+  //               << "..." << std::flush;
+  //     iomananger.WriteObject((char *)output.c_str(),
+  //                            set2,
+  //                            tex_coords2,
+  //                            normals2,
+  //                            tris2,
+  //                            mtls2);
+  //     std::cout << "DONE" << std::endl;
+  // }
 
   return 0;
 }

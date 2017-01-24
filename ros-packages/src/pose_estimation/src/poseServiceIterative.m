@@ -5,7 +5,7 @@ timerval = tic;
 global objModels
 global objNames
 
-frames = [];
+frames = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15];
 
 % Objects
 apc_objects_strs = containers.Map(...
@@ -62,17 +62,17 @@ sceneData = loadScene(tmpDataPath);
 numFrames = length(sceneData.colorFrames);
 
 % Calibrate scene
-% sceneData = loadCalib(calibPath,sceneData);
+sceneData = loadCalib(calibPath,sceneData);
 
 % Fill holes in depth frames for scene
 for frameIdx = 1:length(sceneData.depthFrames)
     sceneData.depthFrames{frameIdx} = fillHoles(sceneData.depthFrames{frameIdx});
-    frames = [frames,frameIdx];
+    % frames = [frames,frameIdx];
 end
 
 % Call Segmentaion module
-getRCNNSegmentation(sceneData, scenePath, tmpDataPath, apc_objects_strs, frames, numFrames);
-% getFCNSegmentation(sceneData, scenePath, tmpDataPath, apc_objects_strs, frames, numFrames);
+% getRCNNSegmentation(sceneData, scenePath, tmpDataPath, apc_objects_strs, frames, numFrames);
+getFCNSegmentation(sceneData, scenePath, tmpDataPath, apc_objects_strs, frames, numFrames);
 % getGTBBoxSegmentation(sceneData, scenePath, tmpDataPath, apc_objects_strs, frames, numFrames, objNames);
 
 % Get Initial Pairwise registrarion
@@ -80,39 +80,52 @@ allfp = fopen(allInitPose, 'wt');
 % Iterate over each Object in Scene
 for obIdx = 1:size(sceneData.objects,2)
     objName = sceneData.objects{obIdx};
+    try
+        % Read object segmented cloud, model data        
+        pclname = sprintf('rcnn-clean-%s.ply',objName);
+        pclname = fullfile(scenePath, pclname);
+        objSegCloud = pcread(pclname);
 
-    % Read object segmented cloud, model data        
-    pclname = sprintf('rcnn-clean-%s.ply',objName);
-    pclname = fullfile(scenePath, pclname);
-    objSegCloud = pcread(pclname);
+        objModel = objModels{find(ismember(objNames,objName))};
+        objModelPts = getModelPoints(sceneData, objModels, objModel);
 
-    objModel = objModels{find(ismember(objNames,objName))};
-    objModelPts = getModelPoints(sceneData, objModels, objModel);
+        % Get Initialization Pose
+        fprintf('\n[Processing] Getting Init Pose for %s\n', objName);
+        % bestpredObjPoseBin = getInitPoseSuper4PCS(scenePath, sceneData, objNames, objModels, obIdx, objSegCloud, objModelPts,...
+        %                                  objModel, inPHYSIM, outPHYSIM);
+        % bestpredObjPoseBin = getInitPosePCA(scenePath, sceneData, objNames, objModels, obIdx, objSegCloud, objModelPts,...
+        %                                  objModel, inPHYSIM, outPHYSIM);
+        bestpredObjPoseBin = getInitPoseFGR(scenePath, sceneData, objNames, objModels, obIdx, objSegCloud, objModelPts,...
+                                         objModel, inPHYSIM, outPHYSIM);
+        fprintf('[Processing] Init Pose Done\n');
+        
+        % Visualize the Output Poses
+        predObjPoseWorld = sceneData.extBin2World * bestpredObjPoseBin;
+        tmpObjModelPts = bestpredObjPoseBin(1:3,1:3) * objModelPts + repmat(bestpredObjPoseBin(1:3,4),1,size(objModelPts,2));
+        tmpObjModelCloud = pointCloud(tmpObjModelPts');
+        pclname = sprintf('rcnn-match-%s',objName);
+        pclname = fullfile(scenePath, pclname);
+        pcwrite(tmpObjModelCloud,pclname,'PLYFormat','binary');
 
-    % Get Initialization Pose
-    fprintf('\n[Processing] Getting Init Pose for %s\n', objName);
-    % bestpredObjPoseBin = getInitPoseSuper4PCS(scenePath, sceneData, objNames, objModels, obIdx, objSegCloud, objModelPts,...
-    %                                  objModel, inPHYSIM, outPHYSIM);
-    bestpredObjPoseBin = getInitPosePCA(scenePath, sceneData, objNames, objModels, obIdx, objSegCloud, objModelPts,...
-                                     objModel, inPHYSIM, outPHYSIM);
-    fprintf('[Processing] Init Pose Done\n');
-    
-    % Visualize the Output Poses
-    predObjPoseWorld = sceneData.extBin2World * bestpredObjPoseBin;
-    tmpObjModelPts = bestpredObjPoseBin(1:3,1:3) * objModelPts + repmat(bestpredObjPoseBin(1:3,4),1,size(objModelPts,2));
-    tmpObjModelCloud = pointCloud(tmpObjModelPts');
-    pclname = sprintf('rcnn-match-%s',objName);
-    pclname = fullfile(scenePath, pclname);
-    pcwrite(tmpObjModelCloud,pclname,'PLYFormat','binary');
-
-    % Write Poses to a file
-    fprintf(allfp, '%s %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f\n', ...
-            objName, ...
-            predObjPoseWorld(1,1), predObjPoseWorld(1,2), predObjPoseWorld(1,3), predObjPoseWorld(1,4), ...
-            predObjPoseWorld(2,1), predObjPoseWorld(2,2), predObjPoseWorld(2,3), predObjPoseWorld(2,4), ...
-            predObjPoseWorld(3,1), predObjPoseWorld(3,2), predObjPoseWorld(3,3), predObjPoseWorld(3,4), ...
-            sceneData.extBin2World(1,4), sceneData.extBin2World(2,4), sceneData.extBin2World(3,4) ...
-        );
+        % Write Poses to a file
+        fprintf(allfp, '%s %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f\n', ...
+                objName, ...
+                predObjPoseWorld(1,1), predObjPoseWorld(1,2), predObjPoseWorld(1,3), predObjPoseWorld(1,4), ...
+                predObjPoseWorld(2,1), predObjPoseWorld(2,2), predObjPoseWorld(2,3), predObjPoseWorld(2,4), ...
+                predObjPoseWorld(3,1), predObjPoseWorld(3,2), predObjPoseWorld(3,3), predObjPoseWorld(3,4), ...
+                sceneData.extBin2World(1,4), sceneData.extBin2World(2,4), sceneData.extBin2World(3,4) ...
+            );
+    catch
+        fprintf('Returning default pose');
+        % Write Poses to a file
+        fprintf(allfp, '%s %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f\n', ...
+                objName, ...
+                1, 0, 0, 0, ...
+                0, 1, 0, 0, ...
+                0, 0, 1, 0, ...
+                sceneData.extBin2World(1,4), sceneData.extBin2World(2,4), sceneData.extBin2World(3,4) ...
+            );
+    end
 end
 fclose(allfp);
 

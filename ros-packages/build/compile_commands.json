@@ -1,0 +1,227 @@
+[
+{
+  "directory": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/build/librealsense",
+  "command": "/usr/bin/c++   -DROS_BUILD_SHARED_LIBS=1 -DRS_USE_V4L2_BACKEND -DUNICODE -Drealsense_EXPORTS  -std=c++11 -fPIC -pedantic -Ofast -Wno-missing-field-initializers -Wno-switch -Wno-multichar -mssse3 -fPIC -isystem /usr/include/libusb-1.0 -I/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/include    -o CMakeFiles/realsense.dir/src/archive.cpp.o -c /home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/src/archive.cpp",
+  "file": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/src/archive.cpp"
+},
+{
+  "directory": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/build/librealsense",
+  "command": "/usr/bin/c++   -DROS_BUILD_SHARED_LIBS=1 -DRS_USE_V4L2_BACKEND -DUNICODE -Drealsense_EXPORTS  -std=c++11 -fPIC -pedantic -Ofast -Wno-missing-field-initializers -Wno-switch -Wno-multichar -mssse3 -fPIC -isystem /usr/include/libusb-1.0 -I/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/include    -o CMakeFiles/realsense.dir/src/context.cpp.o -c /home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/src/context.cpp",
+  "file": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/src/context.cpp"
+},
+{
+  "directory": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/build/librealsense",
+  "command": "/usr/bin/c++   -DROS_BUILD_SHARED_LIBS=1 -DRS_USE_V4L2_BACKEND -DUNICODE -Drealsense_EXPORTS  -std=c++11 -fPIC -pedantic -Ofast -Wno-missing-field-initializers -Wno-switch -Wno-multichar -mssse3 -fPIC -isystem /usr/include/libusb-1.0 -I/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/include    -o CMakeFiles/realsense.dir/src/device.cpp.o -c /home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/src/device.cpp",
+  "file": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/src/device.cpp"
+},
+{
+  "directory": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/build/librealsense",
+  "command": "/usr/bin/c++   -DROS_BUILD_SHARED_LIBS=1 -DRS_USE_V4L2_BACKEND -DUNICODE -Drealsense_EXPORTS  -std=c++11 -fPIC -pedantic -Ofast -Wno-missing-field-initializers -Wno-switch -Wno-multichar -mssse3 -fPIC -isystem /usr/include/libusb-1.0 -I/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/include    -o CMakeFiles/realsense.dir/src/ds-device.cpp.o -c /home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/src/ds-device.cpp",
+  "file": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/src/ds-device.cpp"
+},
+{
+  "directory": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/build/librealsense",
+  "command": "/usr/bin/c++   -DROS_BUILD_SHARED_LIBS=1 -DRS_USE_V4L2_BACKEND -DUNICODE -Drealsense_EXPORTS  -std=c++11 -fPIC -pedantic -Ofast -Wno-missing-field-initializers -Wno-switch -Wno-multichar -mssse3 -fPIC -isystem /usr/include/libusb-1.0 -I/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/include    -o CMakeFiles/realsense.dir/src/ds-private.cpp.o -c /home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/src/ds-private.cpp",
+  "file": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/src/ds-private.cpp"
+},
+{
+  "directory": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/build/librealsense",
+  "command": "/usr/bin/c++   -DROS_BUILD_SHARED_LIBS=1 -DRS_USE_V4L2_BACKEND -DUNICODE -Drealsense_EXPORTS  -std=c++11 -fPIC -pedantic -Ofast -Wno-missing-field-initializers -Wno-switch -Wno-multichar -mssse3 -fPIC -isystem /usr/include/libusb-1.0 -I/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/include    -o CMakeFiles/realsense.dir/src/f200.cpp.o -c /home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/src/f200.cpp",
+  "file": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/src/f200.cpp"
+},
+{
+  "directory": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/build/librealsense",
+  "command": "/usr/bin/c++   -DROS_BUILD_SHARED_LIBS=1 -DRS_USE_V4L2_BACKEND -DUNICODE -Drealsense_EXPORTS  -std=c++11 -fPIC -pedantic -Ofast -Wno-missing-field-initializers -Wno-switch -Wno-multichar -mssse3 -fPIC -isystem /usr/include/libusb-1.0 -I/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/include    -o CMakeFiles/realsense.dir/src/hw-monitor.cpp.o -c /home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/src/hw-monitor.cpp",
+  "file": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/src/hw-monitor.cpp"
+},
+{
+  "directory": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/build/librealsense",
+  "command": "/usr/bin/c++   -DROS_BUILD_SHARED_LIBS=1 -DRS_USE_V4L2_BACKEND -DUNICODE -Drealsense_EXPORTS  -std=c++11 -fPIC -pedantic -Ofast -Wno-missing-field-initializers -Wno-switch -Wno-multichar -mssse3 -fPIC -isystem /usr/include/libusb-1.0 -I/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/include    -o CMakeFiles/realsense.dir/src/image.cpp.o -c /home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/src/image.cpp",
+  "file": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/src/image.cpp"
+},
+{
+  "directory": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/build/librealsense",
+  "command": "/usr/bin/c++   -DROS_BUILD_SHARED_LIBS=1 -DRS_USE_V4L2_BACKEND -DUNICODE -Drealsense_EXPORTS  -std=c++11 -fPIC -pedantic -Ofast -Wno-missing-field-initializers -Wno-switch -Wno-multichar -mssse3 -fPIC -isystem /usr/include/libusb-1.0 -I/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/include    -o CMakeFiles/realsense.dir/src/ivcam-private.cpp.o -c /home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/src/ivcam-private.cpp",
+  "file": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/src/ivcam-private.cpp"
+},
+{
+  "directory": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/build/librealsense",
+  "command": "/usr/bin/c++   -DROS_BUILD_SHARED_LIBS=1 -DRS_USE_V4L2_BACKEND -DUNICODE -Drealsense_EXPORTS  -std=c++11 -fPIC -pedantic -Ofast -Wno-missing-field-initializers -Wno-switch -Wno-multichar -mssse3 -fPIC -isystem /usr/include/libusb-1.0 -I/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/include    -o CMakeFiles/realsense.dir/src/ivcam-device.cpp.o -c /home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/src/ivcam-device.cpp",
+  "file": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/src/ivcam-device.cpp"
+},
+{
+  "directory": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/build/librealsense",
+  "command": "/usr/bin/c++   -DROS_BUILD_SHARED_LIBS=1 -DRS_USE_V4L2_BACKEND -DUNICODE -Drealsense_EXPORTS  -std=c++11 -fPIC -pedantic -Ofast -Wno-missing-field-initializers -Wno-switch -Wno-multichar -mssse3 -fPIC -isystem /usr/include/libusb-1.0 -I/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/include    -o CMakeFiles/realsense.dir/src/log.cpp.o -c /home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/src/log.cpp",
+  "file": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/src/log.cpp"
+},
+{
+  "directory": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/build/librealsense",
+  "command": "/usr/bin/c++   -DROS_BUILD_SHARED_LIBS=1 -DRS_USE_V4L2_BACKEND -DUNICODE -Drealsense_EXPORTS  -std=c++11 -fPIC -pedantic -Ofast -Wno-missing-field-initializers -Wno-switch -Wno-multichar -mssse3 -fPIC -isystem /usr/include/libusb-1.0 -I/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/include    -o CMakeFiles/realsense.dir/src/motion-module.cpp.o -c /home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/src/motion-module.cpp",
+  "file": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/src/motion-module.cpp"
+},
+{
+  "directory": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/build/librealsense",
+  "command": "/usr/bin/c++   -DROS_BUILD_SHARED_LIBS=1 -DRS_USE_V4L2_BACKEND -DUNICODE -Drealsense_EXPORTS  -std=c++11 -fPIC -pedantic -Ofast -Wno-missing-field-initializers -Wno-switch -Wno-multichar -mssse3 -fPIC -isystem /usr/include/libusb-1.0 -I/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/include    -o CMakeFiles/realsense.dir/src/r200.cpp.o -c /home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/src/r200.cpp",
+  "file": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/src/r200.cpp"
+},
+{
+  "directory": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/build/librealsense",
+  "command": "/usr/bin/c++   -DROS_BUILD_SHARED_LIBS=1 -DRS_USE_V4L2_BACKEND -DUNICODE -Drealsense_EXPORTS  -std=c++11 -fPIC -pedantic -Ofast -Wno-missing-field-initializers -Wno-switch -Wno-multichar -mssse3 -fPIC -isystem /usr/include/libusb-1.0 -I/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/include    -o CMakeFiles/realsense.dir/src/rs.cpp.o -c /home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/src/rs.cpp",
+  "file": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/src/rs.cpp"
+},
+{
+  "directory": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/build/librealsense",
+  "command": "/usr/bin/c++   -DROS_BUILD_SHARED_LIBS=1 -DRS_USE_V4L2_BACKEND -DUNICODE -Drealsense_EXPORTS  -std=c++11 -fPIC -pedantic -Ofast -Wno-missing-field-initializers -Wno-switch -Wno-multichar -mssse3 -fPIC -isystem /usr/include/libusb-1.0 -I/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/include    -o CMakeFiles/realsense.dir/src/sr300.cpp.o -c /home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/src/sr300.cpp",
+  "file": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/src/sr300.cpp"
+},
+{
+  "directory": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/build/librealsense",
+  "command": "/usr/bin/c++   -DROS_BUILD_SHARED_LIBS=1 -DRS_USE_V4L2_BACKEND -DUNICODE -Drealsense_EXPORTS  -std=c++11 -fPIC -pedantic -Ofast -Wno-missing-field-initializers -Wno-switch -Wno-multichar -mssse3 -fPIC -isystem /usr/include/libusb-1.0 -I/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/include    -o CMakeFiles/realsense.dir/src/stream.cpp.o -c /home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/src/stream.cpp",
+  "file": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/src/stream.cpp"
+},
+{
+  "directory": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/build/librealsense",
+  "command": "/usr/bin/c++   -DROS_BUILD_SHARED_LIBS=1 -DRS_USE_V4L2_BACKEND -DUNICODE -Drealsense_EXPORTS  -std=c++11 -fPIC -pedantic -Ofast -Wno-missing-field-initializers -Wno-switch -Wno-multichar -mssse3 -fPIC -isystem /usr/include/libusb-1.0 -I/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/include    -o CMakeFiles/realsense.dir/src/sync.cpp.o -c /home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/src/sync.cpp",
+  "file": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/src/sync.cpp"
+},
+{
+  "directory": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/build/librealsense",
+  "command": "/usr/bin/c++   -DROS_BUILD_SHARED_LIBS=1 -DRS_USE_V4L2_BACKEND -DUNICODE -Drealsense_EXPORTS  -std=c++11 -fPIC -pedantic -Ofast -Wno-missing-field-initializers -Wno-switch -Wno-multichar -mssse3 -fPIC -isystem /usr/include/libusb-1.0 -I/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/include    -o CMakeFiles/realsense.dir/src/timestamps.cpp.o -c /home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/src/timestamps.cpp",
+  "file": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/src/timestamps.cpp"
+},
+{
+  "directory": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/build/librealsense",
+  "command": "/usr/bin/c++   -DROS_BUILD_SHARED_LIBS=1 -DRS_USE_V4L2_BACKEND -DUNICODE -Drealsense_EXPORTS  -std=c++11 -fPIC -pedantic -Ofast -Wno-missing-field-initializers -Wno-switch -Wno-multichar -mssse3 -fPIC -isystem /usr/include/libusb-1.0 -I/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/include    -o CMakeFiles/realsense.dir/src/types.cpp.o -c /home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/src/types.cpp",
+  "file": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/src/types.cpp"
+},
+{
+  "directory": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/build/librealsense",
+  "command": "/usr/bin/c++   -DROS_BUILD_SHARED_LIBS=1 -DRS_USE_V4L2_BACKEND -DUNICODE -Drealsense_EXPORTS  -std=c++11 -fPIC -pedantic -Ofast -Wno-missing-field-initializers -Wno-switch -Wno-multichar -mssse3 -fPIC -isystem /usr/include/libusb-1.0 -I/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/include    -o CMakeFiles/realsense.dir/src/uvc-libuvc.cpp.o -c /home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/src/uvc-libuvc.cpp",
+  "file": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/src/uvc-libuvc.cpp"
+},
+{
+  "directory": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/build/librealsense",
+  "command": "/usr/bin/c++   -DROS_BUILD_SHARED_LIBS=1 -DRS_USE_V4L2_BACKEND -DUNICODE -Drealsense_EXPORTS  -std=c++11 -fPIC -pedantic -Ofast -Wno-missing-field-initializers -Wno-switch -Wno-multichar -mssse3 -fPIC -isystem /usr/include/libusb-1.0 -I/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/include    -o CMakeFiles/realsense.dir/src/uvc-v4l2.cpp.o -c /home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/src/uvc-v4l2.cpp",
+  "file": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/src/uvc-v4l2.cpp"
+},
+{
+  "directory": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/build/librealsense",
+  "command": "/usr/bin/c++   -DROS_BUILD_SHARED_LIBS=1 -DRS_USE_V4L2_BACKEND -DUNICODE -Drealsense_EXPORTS  -std=c++11 -fPIC -pedantic -Ofast -Wno-missing-field-initializers -Wno-switch -Wno-multichar -mssse3 -fPIC -isystem /usr/include/libusb-1.0 -I/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/include    -o CMakeFiles/realsense.dir/src/uvc-wmf.cpp.o -c /home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/src/uvc-wmf.cpp",
+  "file": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/src/uvc-wmf.cpp"
+},
+{
+  "directory": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/build/librealsense",
+  "command": "/usr/bin/c++   -DROS_BUILD_SHARED_LIBS=1 -DRS_USE_V4L2_BACKEND -DUNICODE -Drealsense_EXPORTS  -std=c++11 -fPIC -pedantic -Ofast -Wno-missing-field-initializers -Wno-switch -Wno-multichar -mssse3 -fPIC -isystem /usr/include/libusb-1.0 -I/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/include    -o CMakeFiles/realsense.dir/src/uvc.cpp.o -c /home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/src/uvc.cpp",
+  "file": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/src/uvc.cpp"
+},
+{
+  "directory": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/build/librealsense",
+  "command": "/usr/bin/cc  -DROS_BUILD_SHARED_LIBS=1 -DRS_USE_V4L2_BACKEND -DUNICODE -Drealsense_EXPORTS  -std=c11   -fPIC -pedantic -D_BSD_SOURCE   -mssse3 -fPIC -isystem /usr/include/libusb-1.0 -I/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/include    -o CMakeFiles/realsense.dir/src/verify.c.o   -c /home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/src/verify.c",
+  "file": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/src/verify.c"
+},
+{
+  "directory": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/build/librealsense",
+  "command": "/usr/bin/c++   -DROS_BUILD_SHARED_LIBS=1 -DRS_USE_V4L2_BACKEND -DUNICODE -Drealsense_EXPORTS  -std=c++11 -fPIC -pedantic -Ofast -Wno-missing-field-initializers -Wno-switch -Wno-multichar -mssse3 -fPIC -isystem /usr/include/libusb-1.0 -I/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/include    -o CMakeFiles/realsense.dir/src/zr300.cpp.o -c /home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/src/zr300.cpp",
+  "file": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/src/zr300.cpp"
+},
+{
+  "directory": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/build/librealsense",
+  "command": "/usr/bin/cc  -DROS_BUILD_SHARED_LIBS=1 -DRS_USE_V4L2_BACKEND -DUNICODE -Drealsense_EXPORTS  -std=c11   -fPIC -pedantic -D_BSD_SOURCE   -mssse3 -fPIC -isystem /usr/include/libusb-1.0 -I/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/include    -o CMakeFiles/realsense.dir/src/libuvc/ctrl.c.o   -c /home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/src/libuvc/ctrl.c",
+  "file": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/src/libuvc/ctrl.c"
+},
+{
+  "directory": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/build/librealsense",
+  "command": "/usr/bin/cc  -DROS_BUILD_SHARED_LIBS=1 -DRS_USE_V4L2_BACKEND -DUNICODE -Drealsense_EXPORTS  -std=c11   -fPIC -pedantic -D_BSD_SOURCE   -mssse3 -fPIC -isystem /usr/include/libusb-1.0 -I/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/include    -o CMakeFiles/realsense.dir/src/libuvc/dev.c.o   -c /home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/src/libuvc/dev.c",
+  "file": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/src/libuvc/dev.c"
+},
+{
+  "directory": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/build/librealsense",
+  "command": "/usr/bin/cc  -DROS_BUILD_SHARED_LIBS=1 -DRS_USE_V4L2_BACKEND -DUNICODE -Drealsense_EXPORTS  -std=c11   -fPIC -pedantic -D_BSD_SOURCE   -mssse3 -fPIC -isystem /usr/include/libusb-1.0 -I/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/include    -o CMakeFiles/realsense.dir/src/libuvc/diag.c.o   -c /home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/src/libuvc/diag.c",
+  "file": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/src/libuvc/diag.c"
+},
+{
+  "directory": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/build/librealsense",
+  "command": "/usr/bin/cc  -DROS_BUILD_SHARED_LIBS=1 -DRS_USE_V4L2_BACKEND -DUNICODE -Drealsense_EXPORTS  -std=c11   -fPIC -pedantic -D_BSD_SOURCE   -mssse3 -fPIC -isystem /usr/include/libusb-1.0 -I/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/include    -o CMakeFiles/realsense.dir/src/libuvc/frame.c.o   -c /home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/src/libuvc/frame.c",
+  "file": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/src/libuvc/frame.c"
+},
+{
+  "directory": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/build/librealsense",
+  "command": "/usr/bin/cc  -DROS_BUILD_SHARED_LIBS=1 -DRS_USE_V4L2_BACKEND -DUNICODE -Drealsense_EXPORTS  -std=c11   -fPIC -pedantic -D_BSD_SOURCE   -mssse3 -fPIC -isystem /usr/include/libusb-1.0 -I/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/include    -o CMakeFiles/realsense.dir/src/libuvc/init.c.o   -c /home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/src/libuvc/init.c",
+  "file": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/src/libuvc/init.c"
+},
+{
+  "directory": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/build/librealsense",
+  "command": "/usr/bin/cc  -DROS_BUILD_SHARED_LIBS=1 -DRS_USE_V4L2_BACKEND -DUNICODE -Drealsense_EXPORTS  -std=c11   -fPIC -pedantic -D_BSD_SOURCE   -mssse3 -fPIC -isystem /usr/include/libusb-1.0 -I/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/include    -o CMakeFiles/realsense.dir/src/libuvc/stream.c.o   -c /home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/src/libuvc/stream.c",
+  "file": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/src/libuvc/stream.c"
+},
+{
+  "directory": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/build/librealsense/unit-tests",
+  "command": "/usr/bin/c++   -DROS_BUILD_SHARED_LIBS=1 -DRS_USE_V4L2_BACKEND -DUNICODE  -std=c++11 -fPIC -pedantic -Ofast -Wno-missing-field-initializers -Wno-switch -Wno-multichar -mssse3 -std=c++11 -isystem /usr/include/libusb-1.0 -I/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/include    -o CMakeFiles/F200-live-test.dir/unit-tests-live.cpp.o -c /home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/unit-tests/unit-tests-live.cpp",
+  "file": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/unit-tests/unit-tests-live.cpp"
+},
+{
+  "directory": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/build/librealsense/unit-tests",
+  "command": "/usr/bin/c++   -DROS_BUILD_SHARED_LIBS=1 -DRS_USE_V4L2_BACKEND -DUNICODE  -std=c++11 -fPIC -pedantic -Ofast -Wno-missing-field-initializers -Wno-switch -Wno-multichar -mssse3 -std=c++11 -isystem /usr/include/libusb-1.0 -I/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/include    -o CMakeFiles/F200-live-test.dir/unit-tests-live-f200.cpp.o -c /home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/unit-tests/unit-tests-live-f200.cpp",
+  "file": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/unit-tests/unit-tests-live-f200.cpp"
+},
+{
+  "directory": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/build/librealsense/unit-tests",
+  "command": "/usr/bin/c++   -DROS_BUILD_SHARED_LIBS=1 -DRS_USE_V4L2_BACKEND -DUNICODE  -std=c++11 -fPIC -pedantic -Ofast -Wno-missing-field-initializers -Wno-switch -Wno-multichar -mssse3 -std=c++11 -isystem /usr/include/libusb-1.0 -I/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/include    -o CMakeFiles/LR200-live-test.dir/unit-tests-live.cpp.o -c /home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/unit-tests/unit-tests-live.cpp",
+  "file": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/unit-tests/unit-tests-live.cpp"
+},
+{
+  "directory": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/build/librealsense/unit-tests",
+  "command": "/usr/bin/c++   -DROS_BUILD_SHARED_LIBS=1 -DRS_USE_V4L2_BACKEND -DUNICODE  -std=c++11 -fPIC -pedantic -Ofast -Wno-missing-field-initializers -Wno-switch -Wno-multichar -mssse3 -std=c++11 -isystem /usr/include/libusb-1.0 -I/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/include    -o CMakeFiles/LR200-live-test.dir/unit-tests-live-ds-common.cpp.o -c /home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/unit-tests/unit-tests-live-ds-common.cpp",
+  "file": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/unit-tests/unit-tests-live-ds-common.cpp"
+},
+{
+  "directory": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/build/librealsense/unit-tests",
+  "command": "/usr/bin/c++   -DROS_BUILD_SHARED_LIBS=1 -DRS_USE_V4L2_BACKEND -DUNICODE  -std=c++11 -fPIC -pedantic -Ofast -Wno-missing-field-initializers -Wno-switch -Wno-multichar -mssse3 -std=c++11 -isystem /usr/include/libusb-1.0 -I/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/include    -o CMakeFiles/LR200-live-test.dir/unit-tests-live-lr200.cpp.o -c /home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/unit-tests/unit-tests-live-lr200.cpp",
+  "file": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/unit-tests/unit-tests-live-lr200.cpp"
+},
+{
+  "directory": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/build/librealsense/unit-tests",
+  "command": "/usr/bin/c++   -DROS_BUILD_SHARED_LIBS=1 -DRS_USE_V4L2_BACKEND -DUNICODE  -std=c++11 -fPIC -pedantic -Ofast -Wno-missing-field-initializers -Wno-switch -Wno-multichar -mssse3 -std=c++11 -isystem /usr/include/libusb-1.0 -I/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/include    -o CMakeFiles/R200-live-test.dir/unit-tests-live.cpp.o -c /home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/unit-tests/unit-tests-live.cpp",
+  "file": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/unit-tests/unit-tests-live.cpp"
+},
+{
+  "directory": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/build/librealsense/unit-tests",
+  "command": "/usr/bin/c++   -DROS_BUILD_SHARED_LIBS=1 -DRS_USE_V4L2_BACKEND -DUNICODE  -std=c++11 -fPIC -pedantic -Ofast -Wno-missing-field-initializers -Wno-switch -Wno-multichar -mssse3 -std=c++11 -isystem /usr/include/libusb-1.0 -I/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/include    -o CMakeFiles/R200-live-test.dir/unit-tests-live-ds-common.cpp.o -c /home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/unit-tests/unit-tests-live-ds-common.cpp",
+  "file": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/unit-tests/unit-tests-live-ds-common.cpp"
+},
+{
+  "directory": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/build/librealsense/unit-tests",
+  "command": "/usr/bin/c++   -DROS_BUILD_SHARED_LIBS=1 -DRS_USE_V4L2_BACKEND -DUNICODE  -std=c++11 -fPIC -pedantic -Ofast -Wno-missing-field-initializers -Wno-switch -Wno-multichar -mssse3 -std=c++11 -isystem /usr/include/libusb-1.0 -I/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/include    -o CMakeFiles/R200-live-test.dir/unit-tests-live-r200.cpp.o -c /home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/unit-tests/unit-tests-live-r200.cpp",
+  "file": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/unit-tests/unit-tests-live-r200.cpp"
+},
+{
+  "directory": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/build/librealsense/unit-tests",
+  "command": "/usr/bin/c++   -DROS_BUILD_SHARED_LIBS=1 -DRS_USE_V4L2_BACKEND -DUNICODE  -std=c++11 -fPIC -pedantic -Ofast -Wno-missing-field-initializers -Wno-switch -Wno-multichar -mssse3 -std=c++11 -isystem /usr/include/libusb-1.0 -I/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/include    -o CMakeFiles/SR300-live-test.dir/unit-tests-live.cpp.o -c /home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/unit-tests/unit-tests-live.cpp",
+  "file": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/unit-tests/unit-tests-live.cpp"
+},
+{
+  "directory": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/build/librealsense/unit-tests",
+  "command": "/usr/bin/c++   -DROS_BUILD_SHARED_LIBS=1 -DRS_USE_V4L2_BACKEND -DUNICODE  -std=c++11 -fPIC -pedantic -Ofast -Wno-missing-field-initializers -Wno-switch -Wno-multichar -mssse3 -std=c++11 -isystem /usr/include/libusb-1.0 -I/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/include    -o CMakeFiles/SR300-live-test.dir/unit-tests-live-sr300.cpp.o -c /home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/unit-tests/unit-tests-live-sr300.cpp",
+  "file": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/unit-tests/unit-tests-live-sr300.cpp"
+},
+{
+  "directory": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/build/librealsense/unit-tests",
+  "command": "/usr/bin/c++   -DROS_BUILD_SHARED_LIBS=1 -DRS_USE_V4L2_BACKEND -DUNICODE  -std=c++11 -fPIC -pedantic -Ofast -Wno-missing-field-initializers -Wno-switch -Wno-multichar -mssse3 -std=c++11 -isystem /usr/include/libusb-1.0 -I/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/include    -o CMakeFiles/ZR300-live-test.dir/unit-tests-live.cpp.o -c /home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/unit-tests/unit-tests-live.cpp",
+  "file": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/unit-tests/unit-tests-live.cpp"
+},
+{
+  "directory": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/build/librealsense/unit-tests",
+  "command": "/usr/bin/c++   -DROS_BUILD_SHARED_LIBS=1 -DRS_USE_V4L2_BACKEND -DUNICODE  -std=c++11 -fPIC -pedantic -Ofast -Wno-missing-field-initializers -Wno-switch -Wno-multichar -mssse3 -std=c++11 -isystem /usr/include/libusb-1.0 -I/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/include    -o CMakeFiles/ZR300-live-test.dir/unit-tests-live-ds-common.cpp.o -c /home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/unit-tests/unit-tests-live-ds-common.cpp",
+  "file": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/unit-tests/unit-tests-live-ds-common.cpp"
+},
+{
+  "directory": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/build/librealsense/unit-tests",
+  "command": "/usr/bin/c++   -DROS_BUILD_SHARED_LIBS=1 -DRS_USE_V4L2_BACKEND -DUNICODE  -std=c++11 -fPIC -pedantic -Ofast -Wno-missing-field-initializers -Wno-switch -Wno-multichar -mssse3 -std=c++11 -isystem /usr/include/libusb-1.0 -I/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/include    -o CMakeFiles/ZR300-live-test.dir/unit-tests-live-zr300.cpp.o -c /home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/unit-tests/unit-tests-live-zr300.cpp",
+  "file": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/unit-tests/unit-tests-live-zr300.cpp"
+},
+{
+  "directory": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/build/librealsense/unit-tests",
+  "command": "/usr/bin/c++   -DROS_BUILD_SHARED_LIBS=1 -DRS_USE_V4L2_BACKEND -DUNICODE  -std=c++11 -fPIC -pedantic -Ofast -Wno-missing-field-initializers -Wno-switch -Wno-multichar -mssse3 -std=c++11 -isystem /usr/include/libusb-1.0 -I/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/include    -o CMakeFiles/offline-test.dir/unit-tests-offline.cpp.o -c /home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/unit-tests/unit-tests-offline.cpp",
+  "file": "/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/librealsense/unit-tests/unit-tests-offline.cpp"
+}
+]

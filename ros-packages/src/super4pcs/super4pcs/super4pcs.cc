@@ -776,7 +776,7 @@ MatchSuper4PCSImpl::Verify(const Eigen::Matrix<Scalar, 4, 4>& mat) {
   int terminate_value = best_LCP_ * number_of_points;
 
   Scalar sq_eps = epsilon*epsilon;
-  cout<<"points to verify : "<<number_of_points<<std::endl;
+  // cout<<"points to verify : "<<number_of_points<<std::endl;
   for (int i = 0; i < number_of_points; ++i) {
 
     // Use the kdtree to get the nearest neighbor
@@ -900,7 +900,7 @@ bool MatchSuper4PCSImpl::TryOneBase() {
 
   if (!SelectQuadrilateral(&invariant1, &invariant2, &base_id1, &base_id2,
                            &base_id3, &base_id4)) {
-    std::cout<<"SelectQuadrilateral Failed"<<std::endl;
+    // std::cout<<"SelectQuadrilateral Failed"<<std::endl;
     return false;
   }
 #endif
@@ -936,7 +936,7 @@ bool MatchSuper4PCSImpl::TryOneBase() {
                                    pairs2,
                                    sampled_Q_3D_,
                                    &congruent_quads)) {
-    std::cout<<"FindCongruentQuadrilateralsFast Failed"<<std::endl;
+    // std::cout<<"FindCongruentQuadrilateralsFast Failed"<<std::endl;
     return false;
   }
 
@@ -967,7 +967,7 @@ bool MatchSuper4PCSImpl::TryOneBase() {
   Eigen::Matrix<Scalar, 4, 4> transform;
 
   //Chaitanya Debug
-  std::cout<<"size of congruent quads : "<<congruent_quads.size()<<std::endl;
+  // std::cout<<"size of congruent quads : "<<congruent_quads.size()<<std::endl;
 
   for (int i = 0; i < congruent_quads.size(); ++i) {
     int a = congruent_quads[i].vertices[0];
@@ -1022,7 +1022,7 @@ bool MatchSuper4PCSImpl::TryOneBase() {
 
         if (lcp > best_LCP_) {
           //Chaitanya Debug
-          std::cout<<"Best LCP is : "<<lcp<<std::endl;
+          // std::cout<<"Best LCP is : "<<lcp<<std::endl;
 
           // Retain the best LCP and transformation.
           base_[0] = base_id1;
@@ -1142,25 +1142,25 @@ void MatchSuper4PCSImpl::Initialize(const std::vector<Point3D>& P,
   }
 
   //Chaitanya Debug
-  std::cout<<"Sampled P : "<<sampled_P_3D_.size()<<" Sampled Q : "<<sampled_Q_3D_.size()<<std::endl;
-  std::string sampledP = "/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/super4pcs/sampledP.ply";
-  std::string sampledQ = "/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/super4pcs/sampledQ.ply";
-  vector<cv::Point2f> tex_coords3;
-  vector<cv::Point3f> normals3;
-  vector<tripple> tris3;
-  vector<std::string> mtls3;
-  iomananger1.WriteObject((char *)sampledP.c_str(),
-                         sampled_P_3D_,
-                         tex_coords3,
-                         normals3,
-                         tris3,
-                         mtls3);
-  iomananger1.WriteObject((char *)sampledQ.c_str(),
-                         sampled_Q_3D_,
-                         tex_coords3,
-                         normals3,
-                         tris3,
-                         mtls3);
+  // std::cout<<"Sampled P : "<<sampled_P_3D_.size()<<" Sampled Q : "<<sampled_Q_3D_.size()<<std::endl;
+  // std::string sampledP = "/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/super4pcs/sampledP.ply";
+  // std::string sampledQ = "/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/super4pcs/sampledQ.ply";
+  // vector<cv::Point2f> tex_coords3;
+  // vector<cv::Point3f> normals3;
+  // vector<tripple> tris3;
+  // vector<std::string> mtls3;
+  // iomananger1.WriteObject((char *)sampledP.c_str(),
+  //                        sampled_P_3D_,
+  //                        tex_coords3,
+  //                        normals3,
+  //                        tris3,
+  //                        mtls3);
+  // iomananger1.WriteObject((char *)sampledQ.c_str(),
+  //                        sampled_Q_3D_,
+  //                        tex_coords3,
+  //                        normals3,
+  //                        tris3,
+  //                        mtls3);
 
   // Compute the centroids.
   for (int i = 0; i < sampled_P_3D_.size(); ++i) {
@@ -1254,7 +1254,7 @@ void MatchSuper4PCSImpl::Initialize(const std::vector<Point3D>& P,
 
   number_of_trials_ = 10000;
   //Chaitanya Debug
-  std::cout<<"Numer of trials :: "<<number_of_trials_<<std::endl;
+  // std::cout<<"Numer of trials :: "<<number_of_trials_<<std::endl;
 
   printf("norm_max_dist: %f\n", options_.delta);
   current_trial_ = 0;
@@ -1444,7 +1444,7 @@ bool MatchSuper4PCSImpl::Perform_N_steps(int n, cv::Mat* transformation,
   float last_best_LCP = best_LCP_;
   bool ok;
   t0 = clock();
-  std::cout<<"start time : "<<t0<<std::endl;
+  // std::cout<<"start time : "<<t0<<std::endl;
   for (int i = current_trial_; i < current_trial_ + n; ++i) {
     ok = TryOneBase();
 

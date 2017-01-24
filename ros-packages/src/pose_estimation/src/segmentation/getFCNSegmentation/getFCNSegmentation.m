@@ -52,16 +52,20 @@ for obIdx = 1:size(sceneData.objects,2)
     % pclname = fullfile(scenePath, pclname);
     % pcwrite(camPointCloud,pclname,'PLYFormat','binary');
 
-    [objSegmPts, allCamColors] = denoisePointCloud(objSegmPts, allCamColors);
-    
-    camPointCloud = pointCloud(objSegmPts','Color',allCamColors');
-    camPointCloud = pcdownsample(camPointCloud,'gridAverage',gridStep);
-    camPointCloud = pcdenoise(camPointCloud,'NumNeighbors',4);
+    try
+        [objSegmPts, allCamColors] = denoisePointCloud(objSegmPts, allCamColors);
+        
+        camPointCloud = pointCloud(objSegmPts','Color',allCamColors');
+        camPointCloud = pcdownsample(camPointCloud,'gridAverage',gridStep);
+        camPointCloud = pcdenoise(camPointCloud,'NumNeighbors',4);
 
-    objName = sceneData.objects{obIdx};
-    pclname = sprintf('rcnn-clean-%s',objName);
-    pclname = fullfile(scenePath, pclname);
-    objSegmPts = camPointCloud.Location';
-    nocolorpply = pointCloud(objSegmPts');
-    pcwrite(nocolorpply,pclname,'PLYFormat','ascii');
+        objName = sceneData.objects{obIdx};
+        pclname = sprintf('rcnn-clean-%s',objName);
+        pclname = fullfile(scenePath, pclname);
+        objSegmPts = camPointCloud.Location';
+        objSegmPts = single(objSegmPts);
+        nocolorpply = pointCloud(objSegmPts');
+        pcwrite(nocolorpply,pclname,'PLYFormat','ascii');
+    catch
+    end
 end

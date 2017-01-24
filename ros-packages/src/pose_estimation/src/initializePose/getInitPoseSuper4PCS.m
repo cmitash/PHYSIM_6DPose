@@ -1,17 +1,18 @@
 function bestpredObjPoseBin = getInitPoseSuper4PCS(scenePath, sceneData, objNames, objModels, obIdx, camPointCloud, objModelPts, objModel, inPHYSIM, outPHYSIM)
 
 icpWorstRejRatio = 0.9;
+repo_path = getenv('PHYSIM_6DPose_PATH');
 
-pathSuper4PCS = '/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/super4pcs/build/Super4PCS';
-outputpath = '/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/super4pcs/mat_super4pcs_fast.txt';
+pathSuper4PCS = fullfile(repo_path,'ros-packages/src/super4pcs/build/Super4PCS');
+outputpath = fullfile(repo_path,'ros-packages/src/super4pcs/mat_super4pcs_fast.txt');
 
 objName = sceneData.objects{obIdx};
 pclname = sprintf('rcnn-clean-%s.ply',objName);
 pclname = fullfile(scenePath, pclname);
 
-modelpath = sprintf('/home/pracsys/github/PHYSIM_6DPose/ros-packages/src/super4pcs/objmodels/%s.ply',objName);
+modelpath = fullfile(repo_path,sprintf('ros-packages/src/pose_estimation/src/models/objects/%s.ply',objName));
 
-command = [pathSuper4PCS ' -i ' pclname ' ' modelpath ' -o 0.7 -d 0.005 -t 20 -n 200 -m ' outputpath];
+command = [pathSuper4PCS ' -i ' pclname ' ' modelpath ' -o 0.7 -d 0.005 -t 10 -n 200 -m ' outputpath];
 
 % Save library paths
 MatlabPath = getenv('LD_LIBRARY_PATH');

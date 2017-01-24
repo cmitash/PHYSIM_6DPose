@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Export-Package: marvin_convnet;version="1.0.0";uses:="org.ros.internal
+ .message"
+Bundle-Version: 1.0.0
+Tool: Bnd-2.1.0.20130426-122213
+Bundle-Name: marvin_convnet
+Bnd-LastModified: 1484860596000
+Created-By: 1.7.0_60 (Oracle Corporation)
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: org.ros.rosjava_messages.marvin_convnet
+Import-Package: org.ros.internal.message
+

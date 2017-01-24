@@ -14,9 +14,9 @@ end
 disp(active_list);
 [client,reqMsg] = rossvcclient('/update_active_list_and_frame');
 [client2,reqMsg2] = rossvcclient('/update_bbox');
-for frameIdx = 0:(numFrames-1)
+for frameIdx = frames
     fprintf('%d ',frameIdx);
-    frameStr = sprintf('%06d',frameIdx);
+    frameStr = sprintf('%06d',frameIdx-1);
     reqMsg.ActiveList = active_list;
     reqMsg.ActiveFrame = frameStr;
     call(client,reqMsg);
@@ -37,19 +37,17 @@ end
 for obIdx = 1:size(sceneData.objects,2)
     maskFiles = dir(fullfile(tmpDataPath,'bbox_detections',sprintf('*.%s.mask.png',sceneData.objects{1,obIdx})));
     scoreFiles = dir(fullfile(tmpDataPath,'bbox_detections',sprintf('*.%s.score.txt',sceneData.objects{1,obIdx})));
-    objMasks = {};
     allCamColors = [];
     objSegmPts = [];
-    for frameIdx = frames
-        objMasks{frameIdx} = imread(fullfile(tmpDataPath,'bbox_detections',maskFiles(frameIdx).name));
+    for frameIdx = 1:size(frames,2)
         file = fopen(fullfile(tmpDataPath,'bbox_detections',scoreFiles(frameIdx).name),'r');
         score = fscanf(file,'%f');
         fclose(file);
-        if score > 0.3
-            tmpObjMask = objMasks{frameIdx};
-            tmpDepth = sceneData.depthFrames{frameIdx};
-            color = sceneData.colorFrames{frameIdx};
-            tmpExtCam2World = sceneData.extCam2World{frameIdx};
+        if score > 0.0
+            tmpObjMask = imread(fullfile(tmpDataPath,'bbox_detections',maskFiles(frameIdx).name));
+            tmpDepth = sceneData.depthFrames{frames(1,frameIdx)};
+            color = sceneData.colorFrames{frames(1,frameIdx)};
+            tmpExtCam2World = sceneData.extCam2World{frames(1,frameIdx)};
             tmpExtCam2Bin = sceneData.extWorld2Bin * tmpExtCam2World;
             
             % Apply segmentation mask to depth image and project to camera space
@@ -85,16 +83,21 @@ for obIdx = 1:size(sceneData.objects,2)
     % pclname = fullfile(scenePath, pclname);
     % pcwrite(camPointCloud,pclname,'PLYFormat','binary');
 
-    [objSegmPts, allCamColors] = denoisePointCloud(objSegmPts, allCamColors);
-    
-    camPointCloud = pointCloud(objSegmPts','Color',allCamColors');
-    camPointCloud = pcdownsample(camPointCloud,'gridAverage',gridStep);
-    camPointCloud = pcdenoise(camPointCloud,'NumNeighbors',4);
+    try
+        [objSegmPts, allCamColors] = denoisePointCloud(objSegmPts, allCamColors);
+        
+        camPointCloud = pointCloud(objSegmPts','Color',allCamColors');
+        camPointCloud = pcdownsample(camPointCloud,'gridAverage',gridStep);
+        camPointCloud = pcdenoise(camPointCloud,'NumNeighbors',4);
 
-    objName = sceneData.objects{obIdx};
-    pclname = sprintf('rcnn-clean-%s',objName);
-    pclname = fullfile(scenePath, pclname);
-    objSegmPts = camPointCloud.Location';
-    nocolorpply = pointCloud(objSegmPts');
-    pcwrite(nocolorpply,pclname,'PLYFormat','ascii');
+        objName = sceneData.objects{obIdx};
+        pclname = sprintf('rcnn-clean-%s',objName);
+        pclname = fullfile(scenePath, pclname);
+        objSegmPts = camPointCloud.Location';
+        objSegmPts = single(objSegmPts);
+        nocolorpply = pointCloud(objSegmPts');
+        pcwrite(nocolorpply,pclname,'PLYFormat','ascii');
+    catch
+        fprintf('No points found');
+    end
 end

@@ -1,0 +1,8 @@
+prefix=/home/pracsys/github/PHYSIM_6DPose/ros-packages/install
+
+Name: librealsense
+Description: Description of librealsense
+Version: 1.11.0
+Cflags: -I/home/pracsys/github/PHYSIM_6DPose/ros-packages/install/include
+Libs: -L/home/pracsys/github/PHYSIM_6DPose/ros-packages/install/lib -lrealsense
+Requires: 
