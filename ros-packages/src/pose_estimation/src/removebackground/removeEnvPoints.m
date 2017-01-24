@@ -28,14 +28,6 @@ else
 		[indicesNN,distsNN] = multiQueryKNNSearchImpl(backgroundPointCloud,objSegmPts',1);
 		objSegmPts(:,find(sqrt(distsNN) < 0.005)) = [];
 		allCamColors(:,find(sqrt(distsNN) < 0.005)) = [];
-		else
-		% for table (currently hardcoded)
-		viewBounds = 0.54;
-
-		% Remove points outside the TABLE
-		ptsOutsideBounds = find(objSegmPts(3,:) < viewBounds);
-		objSegmPts(:,ptsOutsideBounds) = [];
-		allCamColors(:,ptsOutsideBounds) = [];
 	else
 		% for table (currently hardcoded)
 		viewBounds = 0.54;

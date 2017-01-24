@@ -5,7 +5,7 @@ timerval = tic;
 global objModels
 global objNames
 
-frames = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15];
+frames = [];
 
 % Objects
 apc_objects_strs = containers.Map(...
@@ -26,7 +26,7 @@ outPHYSIM = strcat(repo_path,'/tmp/final_pose.txt');
 allInitPose = strcat(repo_path,'/tmp/allInitPose.txt');
 
 % Add paths and create directories
-addpath(genpath(fullfile(toolboxPath,'rgbd-utils')));
+addpath(genpath(fullfile(toolboxPath,'ros-packages/src/rgbd-utils')));
 
 scenePath = reqMsg.SceneFiles; % Directory holding the RGB-D data of scene
 calibPath = reqMsg.CalibrationFiles; % Directory holding camera pose calibration of scene
@@ -62,17 +62,17 @@ sceneData = loadScene(tmpDataPath);
 numFrames = length(sceneData.colorFrames);
 
 % Calibrate scene
-sceneData = loadCalib(calibPath,sceneData);
+% sceneData = loadCalib(calibPath,sceneData);
 
 % Fill holes in depth frames for scene
 for frameIdx = 1:length(sceneData.depthFrames)
     sceneData.depthFrames{frameIdx} = fillHoles(sceneData.depthFrames{frameIdx});
-    % frames = [frames,frameIdx];
+    frames = [frames,frameIdx];
 end
 
 % Call Segmentaion module
-% getRCNNSegmentation(sceneData, scenePath, tmpDataPath, apc_objects_strs, frames, numFrames);
-getFCNSegmentation(sceneData, scenePath, tmpDataPath, apc_objects_strs, frames, numFrames);
+getRCNNSegmentation(sceneData, scenePath, tmpDataPath, apc_objects_strs, frames, numFrames);
+% getFCNSegmentation(sceneData, scenePath, tmpDataPath, apc_objects_strs, frames, numFrames);
 % getGTBBoxSegmentation(sceneData, scenePath, tmpDataPath, apc_objects_strs, frames, numFrames, objNames);
 
 % Get Initial Pairwise registrarion
@@ -91,12 +91,12 @@ for obIdx = 1:size(sceneData.objects,2)
 
         % Get Initialization Pose
         fprintf('\n[Processing] Getting Init Pose for %s\n', objName);
-        % bestpredObjPoseBin = getInitPoseSuper4PCS(scenePath, sceneData, objNames, objModels, obIdx, objSegCloud, objModelPts,...
-        %                                  objModel, inPHYSIM, outPHYSIM);
+        bestpredObjPoseBin = getInitPoseSuper4PCS(scenePath, sceneData, objNames, objModels, obIdx, objSegCloud, objModelPts,...
+                                         objModel, inPHYSIM, outPHYSIM);
         % bestpredObjPoseBin = getInitPosePCA(scenePath, sceneData, objNames, objModels, obIdx, objSegCloud, objModelPts,...
         %                                  objModel, inPHYSIM, outPHYSIM);
-        bestpredObjPoseBin = getInitPoseFGR(scenePath, sceneData, objNames, objModels, obIdx, objSegCloud, objModelPts,...
-                                         objModel, inPHYSIM, outPHYSIM);
+        % bestpredObjPoseBin = getInitPoseFGR(scenePath, sceneData, objNames, objModels, obIdx, objSegCloud, objModelPts,...
+        %                                  objModel, inPHYSIM, outPHYSIM);
         fprintf('[Processing] Init Pose Done\n');
         
         % Visualize the Output Poses
