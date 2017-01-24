@@ -24,12 +24,6 @@ set(CUDA_NVCC_FLAGS "-std=c++11")
 # set(CUDNN_INCLUDE_DIR /usr/local/cudnn/v5/include)
 set(CUDNN_LIB_DIR /usr/local/cudnn/v5/lib64)
 
-## Generate messages in the 'msg' folder
-add_message_files(
-  FILES
-  # ObjectHypothesis.msg
-)
-
 ## Generate services in the 'srv' folder
 add_service_files(
   FILES
