@@ -10,23 +10,41 @@ Post-processing : ICP, Physics correction, PhyTrim ICP (Physics-ICP iterative re
 
 Installation :-
 
-1) setup matlab, robotics toolbox and run "ros-packages/src/pose_estimation/src/make.m"
+1) setup Matlab, Matlab Robotics toolbox 
 
-2) setup caffe according to "https://github.com/rbgirshick/py-faster-rcnn"
+2) run ros-packages/src/pose_estimation/src/make.m
 
-3) install blender (for using physics)
+2) setup caffe for RCNN according to : https://github.com/rbgirshick/py-faster-rcnn
 
-4) follow installation for librealsense as in "https://github.com/IntelRealSense/librealsense/blob/master/doc/installation.md"
+3) setup caffe for FCN according to : https://github.com/andyzeng/apc-vision-toolbox
 
-5) catkin_make in ros-packages
+4) install blender (if you wish to use physics or generate synthetic dataset)
 
-Add the following to .bashrc :-
+5) for realsense camera setup : https://github.com/IntelRealSense/librealsense/blob/master/doc/installation.md
+
+6) run catkin_make in the workspace to compile
+
+7) cd ros-packages/src/super4pcs
+
+8) mkdir build && cd build
+
+9) cmake -DCMAKE_BUILD_TYPE=Release -DANN_DIR=$PWD/../ann_1.1.2/ ..
+
+10) make
+
+11) this might require dependencies as in https://github.com/nmellado/Super4PCS/wiki/Compilation
+
+12) cd /home/pracsys/repos/pracsys_ws/src/PHYSIM_6DPose/ros-packages/src/detection_package/lib
+
+13) make
+
+14) Add the following to .bashrc :-
 
 export PHYSIM_6DPose_PATH=path to PHYSIM_6DPose repository
 
 source $PHYSIM_6DPose_PATH/ros-packages/devel/setup.sh
 
-export BLENDER_PATH=path to blender (In case you want to use physics)
+export BLENDER_PATH=path to blender
 
 Basic Usage :-
 
