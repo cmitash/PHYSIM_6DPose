@@ -24,17 +24,17 @@ if strcmp(sceneData.env,'shelf')
 	allCamColors(:,ptsOutsideBounds) = [];
 else
 	if performKNN == 1
-		% remove points close to Shelf
-		[indicesNN,distsNN] = multiQueryKNNSearchImpl(backgroundPointCloud,objSegmPts',1);
-		objSegmPts(:,find(sqrt(distsNN) < 0.005)) = [];
-		allCamColors(:,find(sqrt(distsNN) < 0.005)) = [];
-	else
-		% for table (currently hardcoded)
-		viewBounds = 0.54;
+	 	% remove points close to Shelf
+	 	[indicesNN,distsNN] = multiQueryKNNSearchImpl(backgroundPointCloud,objSegmPts',1);
+	 	objSegmPts(:,find(sqrt(distsNN) < 0.005)) = [];
+	 	allCamColors(:,find(sqrt(distsNN) < 0.005)) = [];
+ 	end
+	
+	% for table (currently hardcoded)
+	viewBounds = 0.53;
 
-		% Remove points outside the TABLE
-		ptsOutsideBounds = find(objSegmPts(3,:) < viewBounds);
-		objSegmPts(:,ptsOutsideBounds) = [];
-		allCamColors(:,ptsOutsideBounds) = [];
-	end
+	% Remove points outside the TABLE
+	ptsOutsideBounds = find(objSegmPts(3,:) < viewBounds);
+	objSegmPts(:,ptsOutsideBounds) = [];
+	allCamColors(:,ptsOutsideBounds) = [];
 end
