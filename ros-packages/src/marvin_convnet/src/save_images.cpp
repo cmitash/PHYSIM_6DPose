@@ -35,6 +35,17 @@ ros::ServiceClient client_sensor;
 
 std::string shelf_bin_ids = "ABCDEFGHIJKL";
 
+realsense_camera::StreamSensor srv_sensor;
+//Get TF
+std::string from_frame = "base_link";
+std::string to_frame   = "realsense5";
+tf::TransformListener * tf_l;
+tf::StampedTransform camera_tf;
+// Save Bin ID
+std::string cam_info_file;
+FILE *fp;
+cv::Mat color_frame;
+
 // Service call
 bool srv_save(marvin_convnet::DetectObjects::Request  &req,
               marvin_convnet::DetectObjects::Response &res) {
@@ -57,7 +68,6 @@ bool srv_save(marvin_convnet::DetectObjects::Request  &req,
   std::string raw_depth_frame_filename = "/raw/frame-" + frame_prefix.str() + ".depth.png";
 
   // Retrieve RGB-D data from camera service and save to disk
-  realsense_camera::StreamSensor srv_sensor;
   if (!client_sensor.call(srv_sensor)) {
     std::cout << "Failed to call service " + camera_service_name << std::endl;
     return true;
@@ -80,9 +90,7 @@ bool srv_save(marvin_convnet::DetectObjects::Request  &req,
     depth2color_extrinsics[i] = srv_sensor.response.depth2colorExtrinsics[i];
 
   // Save Bin ID
-  std::string cam_info_file = write_directory + "/cam.info.txt";
-
-  FILE *fp = fopen(cam_info_file.c_str(), "a");
+  fp = fopen(cam_info_file.c_str(), "a");
 
   if(frame_id == 0)
   {
@@ -125,14 +133,6 @@ bool srv_save(marvin_convnet::DetectObjects::Request  &req,
     fprintf(fp, "%15.8e\t %15.8e\t %15.8e\t %15.8e\t\n", 0.0f, 0.0f, 0.0f, 1.0f);
   }
   
-  //Get TF
-  std::string from_frame = "base_link";
-  std::string to_frame   = "realsense5";
-
-  tf::TransformListener * tf_l;
-  tf_l = new tf::TransformListener;
-  tf::StampedTransform camera_tf;
-
   try {
       tf_l->waitForTransform(from_frame, to_frame, ros::Time(0), ros::Duration(5));
       tf_l->lookupTransform(from_frame, to_frame, 
@@ -151,7 +151,7 @@ bool srv_save(marvin_convnet::DetectObjects::Request  &req,
   fclose(fp);
 
   // Save color frame
-  cv::Mat color_frame = cv::Mat(frame_width * frame_height * 3, 1, CV_8U, cloud_buffer_rgb).clone();
+  color_frame = cv::Mat(frame_width * frame_height * 3, 1, CV_8U, cloud_buffer_rgb).clone();
   color_frame = color_frame.reshape(3, frame_height);
   cv::cvtColor(color_frame, color_frame, CV_RGB2BGR);
   cv::imwrite(write_directory + color_frame_filename, color_frame);
@@ -178,6 +178,9 @@ int main(int argc, char **argv) {
 
   // Assert parameters
   assert (!write_directory.empty());
+
+  tf_l = new tf::TransformListener;
+  cam_info_file = write_directory + "/cam.info.txt";
 
   // Start service
   ros::ServiceServer service_save = n.advertiseService("save_images", srv_save);
