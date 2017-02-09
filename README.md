@@ -1,7 +1,7 @@
 <snippet>
-  <content><![CDATA[
+  <content><
 
-# ${1:PHYSIM_6DPose}
+# PHYSIM_6DPose
 6D Pose estimation for shelf and table-top environments.
 
 Methods you can chose from :-
@@ -67,5 +67,4 @@ export BLENDER_PATH=path to blender
 ## References 
 
 ]]></content>
-  <tabTrigger>readme</tabTrigger>
 </snippet>
