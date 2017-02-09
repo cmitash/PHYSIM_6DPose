@@ -1,6 +1,5 @@
 <snippet>
-  <content><
-
+  <content>
 # PHYSIM_6DPose
 6D Pose estimation for shelf and table-top environments.
 
@@ -65,6 +64,5 @@ export BLENDER_PATH=path to blender
 6) rosservice call /pose_estimation "path-to-tmp-directory" "path-to-calibration-folder"
 
 ## References 
-
-]]></content>
+</content>
 </snippet>
