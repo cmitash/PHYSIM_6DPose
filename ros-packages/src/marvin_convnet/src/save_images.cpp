@@ -144,10 +144,42 @@ bool srv_save(marvin_convnet::DetectObjects::Request  &req,
                   << " -> " << except.what();
   }
 
-  fprintf(fp, "\n# Camera-to-world extrinsic matrix (camera pose) for frame-%06d\n",frame_id);
-  for (int i = 0; i < 3; ++i)
-      fprintf(fp, "%15.8e\t %15.8e\t %15.8e\t %15.8e\t\n", (float)(camera_tf.getBasis()[i][0]), (float)(camera_tf.getBasis()[i][1]), (float)(camera_tf.getBasis()[i][2]), (float)(camera_tf.getOrigin()[i]));
-  fprintf(fp, "%15.8e\t %15.8e\t %15.8e\t %15.8e\t\n", 0.0f, 0.0f, 0.0f, 1.0f);
+
+  // Calibrated for current mapping poistions on table-top
+  if(frame_id == 0)
+  {
+    // Camera-to-world extrinsic matrix - 1
+    fprintf(fp, "\n# Camera-to-world extrinsic matrix (camera pose) for frame-%06d\n",0);
+    fprintf(fp, "%15.8e\t %15.8e\t %15.8e\t %15.8e\t\n",-8.27652752e-01,  -4.82118964e-01,    2.87318975e-01,    7.08618581e-01);
+    fprintf(fp, "%15.8e\t %15.8e\t %15.8e\t %15.8e\t\n",-5.05143642e-01,   4.16814238e-01,   -7.55708814e-01,    2.73179799e-01);
+    fprintf(fp, "%15.8e\t %15.8e\t %15.8e\t %15.8e\t\n", 2.44582906e-01,  -7.70601809e-01,   -5.88516772e-01,    8.25904846e-01);
+    fprintf(fp, "%15.8e\t %15.8e\t %15.8e\t %15.8e\t\n", 0.0f, 0.0f, 0.0f, 1.0f);
+  }
+
+  if(frame_id == 1)
+  {
+    // Camera-to-world extrinsic matrix - 2
+    fprintf(fp, "\n# Camera-to-world extrinsic matrix (camera pose) for frame-%06d\n",1);
+    fprintf(fp, "%15.8e\t %15.8e\t %15.8e\t %15.8e\t\n", -1.67247206e-01,   -8.66326511e-01,    4.70645040e-01,    5.65053463e-01);
+    fprintf(fp, "%15.8e\t %15.8e\t %15.8e\t %15.8e\t\n", -9.75943208e-01,    2.13196963e-01,    4.56275791e-02,   -6.27083778e-02);
+    fprintf(fp, "%15.8e\t %15.8e\t %15.8e\t %15.8e\t\n", -1.39868468e-01,   -4.51691747e-01,   -8.81142080e-01,    9.50254083e-01);
+    fprintf(fp, "%15.8e\t %15.8e\t %15.8e\t %15.8e\t\n", 0.0f, 0.0f, 0.0f, 1.0f);
+  }
+
+  if(frame_id == 2)
+  {
+    // Camera-to-world extrinsic matrix - 3
+    fprintf(fp, "\n# Camera-to-world extrinsic matrix (camera pose) for frame-%06d\n",2);
+    fprintf(fp, "%15.8e\t %15.8e\t %15.8e\t %15.8e\t\n", -8.78009915e-01,    4.57584143e-01,    1.40411258e-01,    6.99696481e-01);
+    fprintf(fp, "%15.8e\t %15.8e\t %15.8e\t %15.8e\t\n", 3.21694493e-01,   3.46929163e-01,    8.80995333e-01,   -5.00843585e-01);
+    fprintf(fp, "%15.8e\t %15.8e\t %15.8e\t %15.8e\t\n", 3.54416758e-01,   8.18692207e-01,   -4.51809555e-01,    7.46752262e-01);
+    fprintf(fp, "%15.8e\t %15.8e\t %15.8e\t %15.8e\t\n", 0.0f, 0.0f, 0.0f, 1.0f);
+  }
+
+  
+  // for (int i = 0; i < 3; ++i)
+  //     fprintf(fp, "%15.8e\t %15.8e\t %15.8e\t %15.8e\t\n", (float)(camera_tf.getBasis()[i][0]), (float)(camera_tf.getBasis()[i][1]), (float)(camera_tf.getBasis()[i][2]), (float)(camera_tf.getOrigin()[i]));
+  // fprintf(fp, "%15.8e\t %15.8e\t %15.8e\t %15.8e\t\n", 0.0f, 0.0f, 0.0f, 1.0f);
   fclose(fp);
 
   // Save color frame
