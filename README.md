@@ -1,3 +1,7 @@
+<snippet>
+  <content><![CDATA[
+
+# ${1:PHYSIM_6DPose}
 6D Pose estimation for shelf and table-top environments.
 
 Methods you can chose from :-
@@ -8,7 +12,7 @@ Point Cloud registration : PCA, Super4PCS
 
 Post-processing : ICP, Physics correction, PhyTrim ICP (Physics-ICP iterative reasoning)
 
-Installation :-
+## Installation
 
 1) setup Matlab, Matlab Robotics toolbox 
 
@@ -46,7 +50,7 @@ source $PHYSIM_6DPose_PATH/ros-packages/devel/setup.sh
 
 export BLENDER_PATH=path to blender
 
-Basic Usage :-
+## Usage
 
 1) start "robot.launch" which publishes the realsense camera pose. (staticTrans.txt in repository root has current camera pose)
 
@@ -60,4 +64,8 @@ Basic Usage :-
 
 6) rosservice call /pose_estimation "path-to-tmp-directory" "path-to-calibration-folder"
 
-more details coming soon...
+## References 
+
+]]></content>
+  <tabTrigger>readme</tabTrigger>
+</snippet>
