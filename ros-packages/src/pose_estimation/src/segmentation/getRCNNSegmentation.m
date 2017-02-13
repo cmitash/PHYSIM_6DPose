@@ -43,7 +43,7 @@ for obIdx = 1:size(sceneData.objects,2)
         file = fopen(fullfile(tmpDataPath,'bbox_detections',scoreFiles(frameIdx).name),'r');
         score = fscanf(file,'%f');
         fclose(file);
-        if score > 0.0
+        if score > 0.3
             tmpObjMask = imread(fullfile(tmpDataPath,'bbox_detections',maskFiles(frameIdx).name));
             tmpDepth = sceneData.depthFrames{frames(1,frameIdx)};
             color = sceneData.colorFrames{frames(1,frameIdx)};
@@ -70,13 +70,17 @@ for obIdx = 1:size(sceneData.objects,2)
         end
     end
 
-    % Remove points outside Shelf/Table
-    if useBgCalib == 1
-        [objSegmPts, allCamColors] = removeEnvPoints(sceneData, backgroundPointCloud, objSegmPts, allCamColors, extBin2Bg, 1);
-    else
-        [objSegmPts, allCamColors] = removeEnvPoints(sceneData, backgroundPointCloud, objSegmPts, allCamColors, extBin2Bg, 0);
+    try
+        % Remove points outside Shelf/Table
+        if useBgCalib == 1
+            [objSegmPts, allCamColors] = removeEnvPoints(sceneData, backgroundPointCloud, objSegmPts, allCamColors, extBin2Bg, 1);
+        else
+            [objSegmPts, allCamColors] = removeEnvPoints(sceneData, backgroundPointCloud, objSegmPts, allCamColors, extBin2Bg, 0);
+        end
+    catch
+        fprintf('No points found');
     end
-
+    
     % Store raw point cloud with colors
     % camPointCloud = pointCloud(objSegmPts','Color',allCamColors');
     % pclname = sprintf('rcnn-raw-%d',obIdx);

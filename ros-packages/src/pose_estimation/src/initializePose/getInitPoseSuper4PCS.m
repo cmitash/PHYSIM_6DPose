@@ -10,9 +10,9 @@ objName = sceneData.objects{obIdx};
 pclname = sprintf('rcnn-clean-%s.ply',objName);
 pclname = fullfile(scenePath, pclname);
 
-modelpath = fullfile(repo_path,sprintf('ros-packages/src/pose_estimation/src/models/objects/%s.ply',objName));
+modelpath = fullfile(repo_path,sprintf('ros-packages/src/pose_estimation/src/models/objects_pracsys/%s.ply',objName));
 
-command = [pathSuper4PCS ' -i ' pclname ' ' modelpath ' -o 0.7 -d 0.005 -t 10 -n 200 -m ' outputpath];
+command = [pathSuper4PCS ' -i ' pclname ' ' modelpath ' -o 0.7 -d 0.005 -t 8 -n 200 -m ' outputpath];
 
 % Save library paths
 MatlabPath = getenv('LD_LIBRARY_PATH');

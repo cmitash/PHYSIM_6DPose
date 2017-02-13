@@ -5,7 +5,7 @@ timerval = tic;
 global objModels
 global objNames
 
-frames = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15];
+frames = [1 2 3];
 
 % Objects
 apc_objects_strs = containers.Map(...
@@ -26,7 +26,7 @@ outPHYSIM = strcat(repo_path,'/tmp/final_pose.txt');
 allInitPose = strcat(repo_path,'/tmp/allInitPose.txt');
 
 % Add paths and create directories
-addpath(genpath(fullfile(toolboxPath,'rgbd-utils')));
+addpath(genpath(fullfile(toolboxPath,'ros-packages/src/rgbd-utils')));
 
 scenePath = reqMsg.SceneFiles; % Directory holding the RGB-D data of scene
 calibPath = reqMsg.CalibrationFiles; % Directory holding camera pose calibration of scene
@@ -62,7 +62,7 @@ sceneData = loadScene(tmpDataPath);
 numFrames = length(sceneData.colorFrames);
 
 % Calibrate scene
-sceneData = loadCalib(calibPath,sceneData);
+% sceneData = loadCalib(calibPath,sceneData);
 
 camposefile = fopen(fullfile(tmpDataPath,'cam_pose.txt'),'wt');
 
@@ -83,7 +83,8 @@ for frameIdx = 1:length(sceneData.depthFrames)
                 camrot(2,1), camrot(2,2), camrot(2,3), campose(2,4), ...
                 camrot(3,1), camrot(3,2), camrot(3,3), campose(3,4) ...
             );
-    copyfile(fullfile(tmpDataPath,sprintf('frame-%06d.color.png',frameIdx-1)),fullfile(repo_path,sprintf('ros-packages/src/physics-scene-rendering-vision/rendered_images/image_%05d.png',12825 + numfilespresent + frameIdx-1)));
+    disp(fullfile(repo_path,sprintf('ros-packages/src/physics-scene-rendering-vision/rendered_images/image_%05d.png',numfilespresent + frameIdx-1)));
+    copyfile(fullfile(tmpDataPath,sprintf('frame-%06d.color.png',frameIdx-1)),fullfile(repo_path,sprintf('ros-packages/src/physics-scene-rendering-vision/rendered_images/image_%05d.png',numfilespresent + frameIdx-1)));
 end
 
 % Call Segmentaion module
@@ -105,10 +106,10 @@ for obIdx = 1:size(sceneData.objects,2)
 
         % Get Initialization Pose
         fprintf('\n[Processing] Getting Init Pose for %s\n', objName);
-        % bestpredObjPoseBin = getInitPoseSuper4PCS(scenePath, sceneData, objNames, objModels, obIdx, objSegCloud, objModelPts,...
-        %                                  objModel, inPHYSIM, outPHYSIM);
-        bestpredObjPoseBin = getInitPosePCA(scenePath, sceneData, objNames, objModels, obIdx, objSegCloud, objModelPts,...
+        bestpredObjPoseBin = getInitPoseSuper4PCS(scenePath, sceneData, objNames, objModels, obIdx, objSegCloud, objModelPts,...
                                          objModel, inPHYSIM, outPHYSIM);
+        % bestpredObjPoseBin = getInitPosePCA(scenePath, sceneData, objNames, objModels, obIdx, objSegCloud, objModelPts,...
+        %                                  objModel, inPHYSIM, outPHYSIM);
         fprintf('[Processing] Init Pose Done\n');
         
         % Visualize the Output Poses
@@ -142,19 +143,21 @@ end
 fclose(allfp);
 
 copyfile(allInitPose,inPHYSIM);
-t = tcpip('localhost',10000);
+runPhyTrimICP(inPHYSIM, outPHYSIM, objNames, objModels, sceneData, scenePath);
+
+t = tcpip('localhost',20000);
 fopen(t);
-fprintf(t,'%d',15);
+fprintf(t,'%d',3);
 fclose(t);
 
-t2 = tcpip('localhost', 40000, 'NetworkRole', 'server');
+t2 = tcpip('localhost', 50000, 'NetworkRole', 'server');
 fopen(t2);
 fprintf('[Processing] Sending results\n');
 fclose(t2)
 
 [objName, val1, val2, val3, val4, ...
  val5, val6, val7, val8, ...
- val9, val10, val11, val12, val13, val14, val15] = textread(inPHYSIM, '%s %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f\n');
+ val9, val10, val11, val12, val13, val14, val15] = textread(outPHYSIM, '%s %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f\n');
 
 % Write poses to rosmessage
 for obIdx = 1:size(sceneData.objects,2)

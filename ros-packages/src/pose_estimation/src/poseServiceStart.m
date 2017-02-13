@@ -71,7 +71,7 @@ fprintf('Loading pre-scanned object models...\n');
 for objIdx = 1:length(objNames)
   try
     fprintf('    %s\n',objNames{objIdx});
-    objModels{objIdx} = pcread(sprintf('models/objects/%s.ply',objNames{objIdx}));
+    objModels{objIdx} = pcread(sprintf('models/objects_pracsys/%s.ply',objNames{objIdx}));
   end
 end
 
@@ -92,5 +92,5 @@ KNNSearchGPU = parallel.gpu.CUDAKernel('KNNSearch.ptx','KNNSearch.cu');
 toc;
 
 % Start ROS service
-server = rossvcserver('/pose_estimation', 'pose_estimation/EstimateObjectPose', @poseServiceIterative);
+server = rossvcserver('/pose_estimation', 'pose_estimation/EstimateObjectPose', @poseServiceSelfLearn);
 fprintf('Ready.\n');
