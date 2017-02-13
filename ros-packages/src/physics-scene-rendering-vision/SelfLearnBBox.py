@@ -27,8 +27,8 @@ g_syn_light_environment_energy_lowbound = 0.5
 g_syn_light_environment_energy_highbound = 1
 
 # Camera Intrinsic matrix
-K = Matrix(([611.355347, 0.0, 337.405731],[0.0, 611.355408, 247.190155],[0.0, 0.0, 1.0 ]))
-# K = Matrix(([611.355347, 0.0, 320],[0.0, 611.355408, 240],[0.0, 0.0, 1.0 ]))
+# K = Matrix(([611.355347, 0.0, 337.405731],[0.0, 611.355408, 247.190155],[0.0, 0.0, 1.0 ]))
+K = Matrix(([611.355347, 0.0, 320],[0.0, 611.355408, 240],[0.0, 0.0, 1.0 ]))
 
 
 # Object Files (.obj)
@@ -46,9 +46,8 @@ object_file_dict = {'crayola_24_ct':1, 'expo_dry_erase_board_eraser':2, 'folgers
 
 # Input Pose File path
 init_pose_file = g_repo_path + '/tmp/init_pose.txt'
-final_pose_file = g_repo_path + '/tmp/final_pose.txt'
 cam_pose_file = g_repo_path + '/tmp/cam_pose.txt'
-
+# cam_pose_file = '/home/pracsys/github/database/cam_pose.txt';
 ############################################################################
 ##### CORRECT POSES ##################################################
 ############################################################################
@@ -67,11 +66,11 @@ def set_camera_using_intrinsics():
     scene = bpy.context.scene
     sensor_width_in_mm = K[1][1]*K[0][2] / (K[0][0]*K[1][2])
     sensor_height_in_mm = 1  # doesn't matter
-    # resolution_x_in_px = K[0][2]*2  # principal point assumed at the center
-    # resolution_y_in_px = K[1][2]*2  # principal point assumed at the center
+    resolution_x_in_px = K[0][2]*2  # principal point assumed at the center
+    resolution_y_in_px = K[1][2]*2  # principal point assumed at the center
 
-    resolution_x_in_px = 640
-    resolution_y_in_px = 480
+    # resolution_x_in_px = 640
+    # resolution_y_in_px = 480
 
     s_u = resolution_x_in_px / sensor_width_in_mm
     s_v = resolution_y_in_px / sensor_height_in_mm
@@ -212,14 +211,14 @@ for obj_file_name in object_file_list:
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 # Bind the socket to the port
-server_address = ('localhost', 10000)
+server_address = ('localhost', 20000)
 sock.bind(server_address)
 
 # Listen for incoming connections
 sock.listen(1)
 
 frames = 0
-image_num = 12825
+image_num = len(glob.glob1("rendered_images", "image_*.png"))
 
 # set camera
 set_camera_using_intrinsics()
@@ -235,9 +234,6 @@ while True:
     frames = int(data)
     print('received int %d' % frames)
     connection.close()
-
-    if os.path.exists(final_pose_file):
-        os.remove(final_pose_file)
 
     # Get Pose List
     pose_list = list()
@@ -354,10 +350,18 @@ while True:
 
     # Create a TCP/IP socket
     sock2 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    sock2.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 
-    # Connect the socket to the port where the server is listening
-    serv_address = ('localhost', 40000)
-    sock2.connect(serv_address)
+    serv_address = ('localhost', 50000)
+
+    connected = False
+    while not connected:
+        try:
+            sock2.connect(serv_address)
+            connected = True
+        except Exception as e:
+            pass #Do nothing, just try again
+
     sock2.sendall(b'hi')
     sock2.close()
         
