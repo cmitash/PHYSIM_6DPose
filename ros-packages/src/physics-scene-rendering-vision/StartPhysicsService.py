@@ -15,7 +15,7 @@ g_blank_blend_file_path = 'blank.blend'
 blank_file = osp.join(g_blank_blend_file_path)
 # pose_correct_code = osp.join('visualize.py')
 # pose_correct_code = osp.join('ComputeGradient.py')
-pose_correct_code = osp.join('EnforcePhysics.py')
+pose_correct_code = osp.join('EnforcePhysicsTable.py')
 temp_dirname = tempfile.mkdtemp()
 
 pose_cmd = '%s %s -b --python %s -- %s %s' % \

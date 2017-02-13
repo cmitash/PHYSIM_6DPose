@@ -21,9 +21,9 @@ object_file_dict = {'crayola_24_ct':1, 'expo_dry_erase_board_eraser':2, 'folgers
                     'kleenex_tissue_box':10, 'ticonderoga_12_pencils':11, 'dove_beauty_bar':12,
                     'dr_browns_bottle_brush':13, 'elmers_washable_no_run_school_glue':14, 'rawlings_baseball':15}
 
-def draw_bboxes(syn_images_folder):
-    end = len(glob.glob1("rendered_images", "rendered_image_*.png"))
-    for i in range(12825, 12825 + end):
+def draw_bboxes(begin, syn_images_folder):
+    end = len(glob.glob1("rendered_images", "image_*.png"))
+    for i in range(begin, end):
         # Read an image
         img_filepath = osp.join(syn_images_folder, 'rendered_image_%05d.png' % i)
         real_img_filepath = osp.join(syn_images_folder, 'image_%05d.png' % i)
@@ -92,6 +92,8 @@ g_blender_executable_path = os.environ['BLENDER_PATH']
 
 g_blank_blend_file_path = 'blank.blend'
 
+begin = len(glob.glob1("rendered_images", "bbox_*.txt"))
+
 # call blender to render images
 blank_file = osp.join(g_blank_blend_file_path)
 pose_correct_code = osp.join('SelfLearnBBox.py')
@@ -110,5 +112,5 @@ except:
     print('render failed. render_cmd: %s' % (render_cmd))
 
 # draw bbox on image
-draw_bboxes(syn_images_folder)
+draw_bboxes(begin, syn_images_folder)
 
