@@ -64,5 +64,11 @@ export BLENDER_PATH=path to blender
 6) rosservice call /pose_estimation "path-to-tmp-directory" "path-to-calibration-folder"
 
 ## References 
+
+1) Multi-view Self-supervised Deep Learning for 6D Pose Estimation in the Amazon Picking Challenge : Andy Zeng, Kuan-Ting Yu, Shuran Song, Daniel Suo, Ed Walker Jr., Alberto Rodriguez and Jianxiong Xiao (http://apc.cs.princeton.edu/)
+
+2) Super4PCS: Fast Global Pointcloud Registration via Smart Indexing : Mellado, Nicolas and Aiger, Dror and Mitra, Niloy J. (http://geometry.cs.ucl.ac.uk/projects/2014/super4PCS/)
+
+3) Fast Global registration : Qian-Yi Zhou, Jaesik Park, and Vladlen Koltun (http://vladlen.info/publications/fast-global-registration/)
 </content>
 </snippet>
