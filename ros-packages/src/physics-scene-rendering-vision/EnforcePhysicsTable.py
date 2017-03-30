@@ -81,7 +81,7 @@ for obj_file_name in object_file_list:
     imported = bpy.context.selected_objects[0]
     objectlist.append(imported.name)
 
-# SHELF BASE
+# TABLE-TOP
 loc = [0,0,0]
 bpy.ops.mesh.primitive_cube_add(location=loc)
 bpy.context.object.dimensions = [2.0, 2.0, 0.2]
@@ -91,39 +91,6 @@ bpy.ops.object.modifier_add(type = 'COLLISION')
 bpy.context.object.rigid_body.enabled = False
 bpy.context.object.rigid_body.use_margin = True
 bpy.context.object.rigid_body.collision_margin = 0
-
-# SHELF LEFT
-# loc = [0,0,0]
-# bpy.ops.mesh.primitive_cube_add(location=loc)
-# bpy.context.object.dimensions = [0.43, 0.01, 0.24]
-# scene.objects.active = bpy.context.object
-# bpy.ops.rigidbody.object_add(type='ACTIVE')
-# bpy.ops.object.modifier_add(type = 'COLLISION')
-# bpy.context.object.rigid_body.enabled = False
-# bpy.context.object.rigid_body.use_margin = True
-# bpy.context.object.rigid_body.collision_margin = 0
-
-# # SHELF RIGHT
-# loc = [0,0,0]
-# bpy.ops.mesh.primitive_cube_add(location=loc)
-# bpy.context.object.dimensions = [0.43, 0.01, 0.24]
-# scene.objects.active = bpy.context.object
-# bpy.ops.rigidbody.object_add(type='ACTIVE')
-# bpy.ops.object.modifier_add(type = 'COLLISION')
-# bpy.context.object.rigid_body.enabled = False
-# bpy.context.object.rigid_body.use_margin = True
-# bpy.context.object.rigid_body.collision_margin = 0
-
-# # SHELF BACK
-# loc = [0,0,0]
-# bpy.ops.mesh.primitive_cube_add(location=loc)
-# bpy.context.object.dimensions = [0.01, 0.28, 0.24]
-# scene.objects.active = bpy.context.object
-# bpy.ops.rigidbody.object_add(type='ACTIVE')
-# bpy.ops.object.modifier_add(type = 'COLLISION')
-# bpy.context.object.rigid_body.enabled = False
-# bpy.context.object.rigid_body.use_margin = True
-# bpy.context.object.rigid_body.collision_margin = 0
 
 # Create a TCP/IP socket
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -185,9 +152,6 @@ while True:
     objects['Camera'].rotation_quaternion = cam_rotation
 
     objects["Cube"].location = [0, 0, 0.429]
-    # objects["Cube.001"].location = [sloc[0] +0.215, sloc[1] - 0.145, sloc[2] + 0.11]
-    # objects["Cube.002"].location = [sloc[0] +0.215, sloc[1] + 0.145, sloc[2] + 0.11]
-    # objects["Cube.003"].location = [sloc[0] + 0.435, sloc[1], sloc[2] + 0.11]
 
     # light setting
     objects['Point'].location = cam_location

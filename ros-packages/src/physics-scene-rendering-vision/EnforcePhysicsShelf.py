@@ -286,10 +286,20 @@ while True:
 
     # Create a TCP/IP socket
     sock2 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    sock2.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+
+    serv_address = ('localhost', 40001)
+
+    connected = False
+    while not connected:
+        try:
+            sock2.connect(serv_address)
+            connected = True
+        except Exception as e:
+            pass #Do nothing, just try again
 
     # Connect the socket to the port where the server is listening
-    serv_address = ('localhost', 40000)
-    sock2.connect(serv_address)
+    # sock2.connect(serv_address)
     sock2.sendall(b'hi')
     sock2.close()
         
