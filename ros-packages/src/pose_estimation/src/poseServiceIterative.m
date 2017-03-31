@@ -8,6 +8,7 @@ global calibBin;
 global usePhysics;
 global SegMode;
 global InitPoseMode;
+global debugOption;
 
 frames = [];
 
@@ -90,9 +91,9 @@ allfp = fopen(allInitPose, 'wt');
 % Iterate over each Object in Scene
 for obIdx = 1:size(sceneData.objects,2)
     objName = sceneData.objects{obIdx};
-    try
+    % try
         % Read object segmented cloud, model data        
-        pclname = sprintf('rcnn-clean-%s.ply',objName);
+        pclname = sprintf('seg-no-color-%s.ply',objName);
         pclname = fullfile(scenePath, pclname);
         objSegCloud = pcread(pclname);
 
@@ -114,13 +115,28 @@ for obIdx = 1:size(sceneData.objects,2)
         end
         fprintf('[Processing] Init Pose Done\n');
         
-        % Visualize the Output Poses
         predObjPoseWorld = sceneData.extBin2World * bestpredObjPoseBin;
-        tmpObjModelPts = bestpredObjPoseBin(1:3,1:3) * objModelPts + repmat(bestpredObjPoseBin(1:3,4),1,size(objModelPts,2));
-        tmpObjModelCloud = pointCloud(tmpObjModelPts');
-        pclname = sprintf('rcnn-match-%s',objName);
-        pclname = fullfile(scenePath, pclname);
-        pcwrite(tmpObjModelCloud,pclname,'PLYFormat','binary');
+
+        % Debug : visualize model points in transformed pose
+        if debugOption == 1
+            tmpObjModelPts = bestpredObjPoseBin(1:3,1:3) * objModelPts + repmat(bestpredObjPoseBin(1:3,4),1,size(objModelPts,2));
+            tmpObjModelCloud = pointCloud(tmpObjModelPts');
+            pclname = sprintf('before-physics-%s',objName);
+            pclname = fullfile(scenePath, pclname);
+
+            poseT = zeros(4,4);
+            quat = rotm2quat(bestpredObjPoseBin(1:3,1:3));
+            rotm = quat2rotm(quat);
+            poseT(1:3,1:3) = rotm';
+            poseT(4,4) = 1;
+            poseT(4,1:3) =  bestpredObjPoseBin(1:3,4)';
+
+            tform = affine3d(poseT);
+            objModelTrans = pctransform(objModel, tform);
+
+            % pcwrite(tmpObjModelCloud,pclname,'PLYFormat','binary');
+            pcwrite(objModelTrans,pclname,'PLYFormat','binary')
+        end
 
         % Write Poses to a file
         fprintf(allfp, '%s %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f\n', ...
@@ -130,17 +146,16 @@ for obIdx = 1:size(sceneData.objects,2)
                 predObjPoseWorld(3,1), predObjPoseWorld(3,2), predObjPoseWorld(3,3), predObjPoseWorld(3,4), ...
                 sceneData.extBin2World(1,4), sceneData.extBin2World(2,4), sceneData.extBin2World(3,4) ...
             );
-    catch
-        fprintf('Returning default pose');
-        % Write Poses to a file
-        fprintf(allfp, '%s %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f\n', ...
-                objName, ...
-                1, 0, 0, 0, ...
-                0, 1, 0, 0, ...
-                0, 0, 1, 0, ...
-                sceneData.extBin2World(1,4), sceneData.extBin2World(2,4), sceneData.extBin2World(3,4) ...
-            );
-    end
+    % catch
+    %     fprintf('Returning default pose');
+    %     fprintf(allfp, '%s %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f\n', ...
+    %             objName, ...
+    %             1, 0, 0, 0, ...
+    %             0, 1, 0, 0, ...
+    %             0, 0, 1, 0, ...
+    %             sceneData.extBin2World(1,4), sceneData.extBin2World(2,4), sceneData.extBin2World(3,4) ...
+    %         );
+    % end
 end
 fclose(allfp);
 copyfile(allInitPose,inPHYSIM);
@@ -149,11 +164,11 @@ copyfile(allInitPose,inPHYSIM);
 % Use physics to correct final poses. This uses local iterative optimization wrt to ICP and phyical consistency.
 if usePhysics == 1
     runPhyTrimICP(inPHYSIM, outPHYSIM, objNames, objModels, sceneData, scenePath);
-    [objName, val1, val2, val3, val4, ...
+    [objNameR, val1, val2, val3, val4, ...
      val5, val6, val7, val8, ...
      val9, val10, val11, val12, val13, val14, val15] = textread(outPHYSIM, '%s %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f\n');
 else
-    [objName, val1, val2, val3, val4, ...
+    [objNameR, val1, val2, val3, val4, ...
      val5, val6, val7, val8, ...
      val9, val10, val11, val12, val13, val14, val15] = textread(inPHYSIM, '%s %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f\n');
 end
@@ -176,6 +191,27 @@ for obIdx = 1:size(sceneData.objects,2)
     predObjPoseWorld(3,4) = val12(obIdx,1);
     predObjPoseWorld(4,4) = 1;
 
+    % Debug : visualize the pose after using physics
+    if usePhysics == 1 && debugOption == 1
+        binpose = inv(sceneData.extBin2World) * predObjPoseWorld;
+        objName = sceneData.objects{obIdx};
+        objModel = objModels{find(ismember(objNames,objName))};
+
+        pclname = sprintf('after-physics-%s',objName);
+        pclname = fullfile(scenePath, pclname);
+        poseT = zeros(4,4);
+        quat = rotm2quat(binpose(1:3,1:3));
+        rotm = quat2rotm(quat);
+        poseT(1:3,1:3) = rotm';
+        poseT(4,4) = 1;
+        poseT(4,1:3) =  binpose(1:3,4)';
+
+        tform = affine3d(poseT);
+        objModelTrans = pctransform(objModel, tform);
+
+        pcwrite(objModelTrans,pclname,'PLYFormat','binary')
+    end
+
     poseTrans = rosmessage('geometry_msgs/Point');
     poseTrans.X = predObjPoseWorld(1,4);
     poseTrans.Y = predObjPoseWorld(2,4);
@@ -194,7 +230,7 @@ for obIdx = 1:size(sceneData.objects,2)
     CurobjectPose = rosmessage('pose_estimation/ObjectPose');
     CurobjectPose.Pose = poseMsg;
 
-    CurobjectPose.Label = char(objName{obIdx,1});
+    CurobjectPose.Label = char(objNameR{obIdx,1});
 
     respMsg.Objects = [respMsg.Objects; CurobjectPose];
 end

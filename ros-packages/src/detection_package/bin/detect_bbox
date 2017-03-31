@@ -77,9 +77,9 @@ class detection:
         br_y = blist[:,3]
         for i in range(0,len(active_object_list)):
             mask_img = np.zeros((height,width), np.uint8)
-            mask_img[tl_y[i]:br_y[i],tl_x[i]:br_x[i]] = 1
+            mask_img[int(tl_y[i]):int(br_y[i]),int(tl_x[i]):int(br_x[i])] = 1
             bbox_img = cv_image.copy()
-            cv2.rectangle(bbox_img,(tl_x[i],tl_y[i]),(br_x[i],br_y[i]),255,1)
+            cv2.rectangle(bbox_img,(int(tl_x[i]),int(tl_y[i])),(int(br_x[i]),int(br_y[i])),255,1)
             cv2.imwrite(tmpdir + '/bbox_detections/frame-' + active_frame + '.' + apc_objects_strs[active_object_list[i]-1] + '.bbox.png',bbox_img)
             cv2.imwrite(tmpdir + '/bbox_detections/frame-' + active_frame + '.' + apc_objects_strs[active_object_list[i]-1] + '.mask.png',mask_img)
             file = open(tmpdir + '/bbox_detections/frame-' + active_frame + '.' + apc_objects_strs[active_object_list[i]-1] + '.score.txt','w')

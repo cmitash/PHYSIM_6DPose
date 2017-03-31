@@ -104,6 +104,7 @@ global tableBounds;
 global gridStep;
 global useBgCalib;
 global detThreshold;
+global debugOption;
 
 
 usePhysics = 1; % If you want to use physics in postprocessing
@@ -118,6 +119,7 @@ tableBounds = 0.528; % points below this bound would be removed if using table
 gridStep = 0.002; % grid size for downsampling point clouds
 useBgCalib = 1; % if you want to use background calibration of bin/table
 detThreshold = 0.3; % threshold on rcnn confidence to be considered as a correct detection
+debugOption = 1; % store intermediate point clouds
 
 % Start ROS service
 server = rossvcserver('/pose_estimation', 'pose_estimation/EstimateObjectPose', @poseServiceIterative);

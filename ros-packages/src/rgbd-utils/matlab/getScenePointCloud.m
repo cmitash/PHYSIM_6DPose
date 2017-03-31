@@ -43,7 +43,7 @@ for frameIdx = 1:numFrames
 
     % Only use points with valid depth
     validDepth = find((camZ > 0));
-    camPts = [camX(validDepth),camY(validDepth),camZ(validDepth)]';
+    camPts = [single(camX(validDepth)),single(camY(validDepth)),single(camZ(validDepth))]';
 
     % Convert to bin coordinate space
     camPts = extCam2Bin(1:3,1:3) * camPts + repmat(extCam2Bin(1:3,4),1,size(camPts,2));

@@ -3,6 +3,7 @@ function getRCNNSegmentation(sceneData, scenePath, tmpDataPath, apc_objects_strs
 global gridStep;
 global useBgCalib;
 global detThreshold;
+global debugOption;
 
 % Call RCNN detector to do 2D object segmentation for each RGB-D frame
 active_list = zeros(1,size(sceneData.objects,2));
@@ -78,12 +79,6 @@ for obIdx = 1:size(sceneData.objects,2)
     catch
         fprintf('No points found');
     end
-    
-    % Store raw point cloud with colors
-    % camPointCloud = pointCloud(objSegmPts','Color',allCamColors');
-    % pclname = sprintf('rcnn-raw-%d',obIdx);
-    % pclname = fullfile(scenePath, pclname);
-    % pcwrite(camPointCloud,pclname,'PLYFormat','binary');
 
     try
         [objSegmPts, allCamColors] = denoisePointCloud(objSegmPts, allCamColors);
@@ -93,12 +88,20 @@ for obIdx = 1:size(sceneData.objects,2)
         camPointCloud = pcdenoise(camPointCloud,'NumNeighbors',4);
 
         objName = sceneData.objects{obIdx};
-        pclname = sprintf('rcnn-clean-%s',objName);
+        pclname = sprintf('seg-no-color-%s',objName);
         pclname = fullfile(scenePath, pclname);
+
+        % debug option : store colored point cloud of the results
+        if debugOption == true
+            pclname_color = sprintf('seg-color-%s',objName);
+            pclname_color = fullfile(scenePath, pclname_color);
+            pcwrite(camPointCloud,pclname_color,'PLYFormat','binary');
+        end
+
         objSegmPts = camPointCloud.Location';
         objSegmPts = single(objSegmPts);
         nocolorpply = pointCloud(objSegmPts');
-        pcwrite(nocolorpply,pclname,'PLYFormat','ascii');
+        pcwrite(nocolorpply,pclname,'PLYFormat','binary');
     catch
         fprintf('No points found');
     end

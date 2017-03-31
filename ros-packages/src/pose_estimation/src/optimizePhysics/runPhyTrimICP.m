@@ -60,13 +60,9 @@ for iter = 1:physicsIterations
             tmpObjModelPts = predObjPoseBin(1:3,1:3) * objModelPts + repmat(predObjPoseBin(1:3,4),1,size(objModelPts,2));
             tmpObjModelCloud = pointCloud(tmpObjModelPts');
 
-            pclname = sprintf('rcnn-clean-%s.ply',name);
+            pclname = sprintf('seg-no-color-%s.ply',name);
             pclname = fullfile(scenePath, pclname);
             objSegCloud = pcread(pclname);
-
-            pclname = sprintf('rcnn-after-physics-%s',name);
-            pclname = fullfile(scenePath, pclname);
-            pcwrite(tmpObjModelCloud,pclname,'PLYFormat','binary');
 
             [tform,movingReg,icpRmse] = pcregrigidGPU(objSegCloud,tmpObjModelCloud,'InlierRatio',icpWorstRejRatio/icp_factor,...
                                             'MaxIterations',100,'Tolerance',[0.0001 0.0009],'Verbose',false,'Extrapolate',true);
