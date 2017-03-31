@@ -91,6 +91,34 @@ fprintf('Setting up CUDA kernel functions...\n');
 KNNSearchGPU = parallel.gpu.CUDAKernel('KNNSearch.ptx','KNNSearch.cu');
 toc;
 
+% Configuration options
+global usePhysics;
+global physicsIterations;
+global physicsstep;
+global finalstep;
+global SegMode;
+global InitPoseMode;
+global calibBin;
+global binBounds;
+global tableBounds;
+global gridStep;
+global useBgCalib;
+global detThreshold;
+
+
+usePhysics = 1; % If you want to use physics in postprocessing
+physicsIterations = 1; % Number of iterations of physics and ICP that will be used
+physicsstep = 5; % Number of steps in each iteration of physics
+finalstep = 20; % Number of steps in final physics step
+SegMode = 'rcnn'; % choose between rcnn, fcn, gt (ground truth)
+InitPoseMode= 'super4pcs'; % choose between super4pcs, pca, fgr
+calibBin = 0; % Should be enabled for Princeton Dataset
+binBounds = [-0.01, 0.40; -0.17, 0.17; -0.06, 0.20]; % points outside this bound would be removed if using shelf
+tableBounds = 0.528; % points below this bound would be removed if using table
+gridStep = 0.002; % grid size for downsampling point clouds
+useBgCalib = 1; % if you want to use background calibration of bin/table
+detThreshold = 0.3; % threshold on rcnn confidence to be considered as a correct detection
+
 % Start ROS service
-server = rossvcserver('/pose_estimation', 'pose_estimation/EstimateObjectPose', @poseServiceSelfLearn);
+server = rossvcserver('/pose_estimation', 'pose_estimation/EstimateObjectPose', @poseServiceIterative);
 fprintf('Ready.\n');

@@ -2,8 +2,12 @@ function resp = poseServiceIterative(~, reqMsg, respMsg)
 
 timerval = tic;
 
-global objModels
-global objNames
+global objModels;
+global objNames;
+global calibBin;
+global usePhysics;
+global SegMode;
+global InitPoseMode;
 
 frames = [];
 
@@ -62,7 +66,9 @@ sceneData = loadScene(tmpDataPath);
 numFrames = length(sceneData.colorFrames);
 
 % Calibrate scene
-% sceneData = loadCalib(calibPath,sceneData);
+if calibBin == 1
+    sceneData = loadCalib(calibPath,sceneData);
+end
 
 % Fill holes in depth frames for scene
 for frameIdx = 1:length(sceneData.depthFrames)
@@ -71,9 +77,13 @@ for frameIdx = 1:length(sceneData.depthFrames)
 end
 
 % Call Segmentaion module
-getRCNNSegmentation(sceneData, scenePath, tmpDataPath, apc_objects_strs, frames, numFrames);
-% getFCNSegmentation(sceneData, scenePath, tmpDataPath, apc_objects_strs, frames, numFrames);
-% getGTBBoxSegmentation(sceneData, scenePath, tmpDataPath, apc_objects_strs, frames, numFrames, objNames);
+if strcmp(SegMode,'rcnn') == 1 
+    getRCNNSegmentation(sceneData, scenePath, tmpDataPath, apc_objects_strs, frames, numFrames);
+elseif strcmp(SegMode,'fcn') == 1 
+    getFCNSegmentation(sceneData, scenePath, tmpDataPath, apc_objects_strs, frames, numFrames);
+elseif strcmp(SegMode == 'gt') == 1
+    getGTBBoxSegmentation(sceneData, scenePath, tmpDataPath, apc_objects_strs, frames, numFrames, objNames);
+end
 
 % Get Initial Pairwise registrarion
 allfp = fopen(allInitPose, 'wt');
@@ -91,12 +101,17 @@ for obIdx = 1:size(sceneData.objects,2)
 
         % Get Initialization Pose
         fprintf('\n[Processing] Getting Init Pose for %s\n', objName);
-        bestpredObjPoseBin = getInitPoseSuper4PCS(scenePath, sceneData, objNames, objModels, obIdx, objSegCloud, objModelPts,...
-                                         objModel, inPHYSIM, outPHYSIM);
-        % bestpredObjPoseBin = getInitPosePCA(scenePath, sceneData, objNames, objModels, obIdx, objSegCloud, objModelPts,...
-        %                                  objModel, inPHYSIM, outPHYSIM);
-        % bestpredObjPoseBin = getInitPoseFGR(scenePath, sceneData, objNames, objModels, obIdx, objSegCloud, objModelPts,...
-        %                                  objModel, inPHYSIM, outPHYSIM);
+
+        if strcmp(InitPoseMode,'super4pcs') == 1 
+            bestpredObjPoseBin = getInitPoseSuper4PCS(scenePath, sceneData, objNames, objModels, obIdx, objSegCloud, objModelPts,...
+                                             objModel, inPHYSIM, outPHYSIM);
+        elseif strcmp(InitPoseMode,'pca') == 1
+            bestpredObjPoseBin = getInitPosePCA(scenePath, sceneData, objNames, objModels, obIdx, objSegCloud, objModelPts,...
+                                             objModel, inPHYSIM, outPHYSIM);
+        elseif strcmp(InitPoseMode,'fgr') == 1
+            bestpredObjPoseBin = getInitPoseFGR(scenePath, sceneData, objNames, objModels, obIdx, objSegCloud, objModelPts,...
+                                             objModel, inPHYSIM, outPHYSIM);
+        end
         fprintf('[Processing] Init Pose Done\n');
         
         % Visualize the Output Poses
@@ -128,13 +143,20 @@ for obIdx = 1:size(sceneData.objects,2)
     end
 end
 fclose(allfp);
-
 copyfile(allInitPose,inPHYSIM);
-% runPhyTrimICP(inPHYSIM, outPHYSIM, objNames, objModels, sceneData, scenePath);
 
-[objName, val1, val2, val3, val4, ...
- val5, val6, val7, val8, ...
- val9, val10, val11, val12, val13, val14, val15] = textread(inPHYSIM, '%s %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f\n');
+
+% Use physics to correct final poses. This uses local iterative optimization wrt to ICP and phyical consistency.
+if usePhysics == 1
+    runPhyTrimICP(inPHYSIM, outPHYSIM, objNames, objModels, sceneData, scenePath);
+    [objName, val1, val2, val3, val4, ...
+     val5, val6, val7, val8, ...
+     val9, val10, val11, val12, val13, val14, val15] = textread(outPHYSIM, '%s %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f\n');
+else
+    [objName, val1, val2, val3, val4, ...
+     val5, val6, val7, val8, ...
+     val9, val10, val11, val12, val13, val14, val15] = textread(inPHYSIM, '%s %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f\n');
+end
 
 % Write poses to rosmessage
 for obIdx = 1:size(sceneData.objects,2)

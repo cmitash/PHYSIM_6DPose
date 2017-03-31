@@ -1,8 +1,9 @@
 function [objSegmPts, allCamColors] = removeEnvPoints(sceneData, backgroundPointCloud, objSegmPts, allCamColors, extBin2Bg, performKNN)
 
-if strcmp(sceneData.env,'shelf')
-	viewBounds = [-0.01, 0.40; -0.17, 0.17; -0.06, 0.20];
+global binBounds;
+global tableBounds;
 
+if strcmp(sceneData.env,'shelf')
 	if performKNN == 1
 		% remove points close to Shelf
 		[indicesNN,distsNN] = multiQueryKNNSearchImpl(backgroundPointCloud,objSegmPts',1);
@@ -17,9 +18,9 @@ if strcmp(sceneData.env,'shelf')
 	end
 
 	% Remove points outside the bin/tote
-	ptsOutsideBounds = find((objSegmPts(1,:) < viewBounds(1,1)) | (objSegmPts(1,:) > viewBounds(1,2)) | ...
-	                        (objSegmPts(2,:) < viewBounds(2,1)) | (objSegmPts(2,:) > viewBounds(2,2)) | ...
-	                        (objSegmPts(3,:) < viewBounds(3,1)) | (objSegmPts(3,:) > viewBounds(3,2)));
+	ptsOutsideBounds = find((objSegmPts(1,:) < binBounds(1,1)) | (objSegmPts(1,:) > binBounds(1,2)) | ...
+	                        (objSegmPts(2,:) < binBounds(2,1)) | (objSegmPts(2,:) > binBounds(2,2)) | ...
+	                        (objSegmPts(3,:) < binBounds(3,1)) | (objSegmPts(3,:) > binBounds(3,2)));
 	objSegmPts(:,ptsOutsideBounds) = [];
 	allCamColors(:,ptsOutsideBounds) = [];
 else
@@ -29,12 +30,9 @@ else
 	 	objSegmPts(:,find(sqrt(distsNN) < 0.008)) = [];
 	 	allCamColors(:,find(sqrt(distsNN) < 0.008)) = [];
  	end
-	
-	% for table (currently hardcoded)
-	viewBounds = 0.528;
 
 	% Remove points outside the TABLE
-	ptsOutsideBounds = find(objSegmPts(3,:) < viewBounds);
+	ptsOutsideBounds = find(objSegmPts(3,:) < tableBounds);
 	objSegmPts(:,ptsOutsideBounds) = [];
 	allCamColors(:,ptsOutsideBounds) = [];
 end

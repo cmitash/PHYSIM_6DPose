@@ -1,15 +1,13 @@
 function getRCNNSegmentation(sceneData, scenePath, tmpDataPath, apc_objects_strs, frames, numFrames)
 
-% if you want to use background calibration (default = false)
-useBgCalib = 1;
-
-% grid size for downsampling point clouds
-gridStep = 0.002;
+global gridStep;
+global useBgCalib;
+global detThreshold;
 
 % Call RCNN detector to do 2D object segmentation for each RGB-D frame
 active_list = zeros(1,size(sceneData.objects,2));
 for obIdx = 1:size(sceneData.objects,2)
-    active_list(1,obIdx) = apc_objects_strs(sceneData.objects{1,obIdx});
+    active_list(1,obIdx) = int16(apc_objects_strs(sceneData.objects{1,obIdx}));
 end
 disp(active_list);
 [client,reqMsg] = rossvcclient('/update_active_list_and_frame');
@@ -43,7 +41,7 @@ for obIdx = 1:size(sceneData.objects,2)
         file = fopen(fullfile(tmpDataPath,'bbox_detections',scoreFiles(frameIdx).name),'r');
         score = fscanf(file,'%f');
         fclose(file);
-        if score > 0.3
+        if score > detThreshold
             tmpObjMask = imread(fullfile(tmpDataPath,'bbox_detections',maskFiles(frameIdx).name));
             tmpDepth = sceneData.depthFrames{frames(1,frameIdx)};
             color = sceneData.colorFrames{frames(1,frameIdx)};

@@ -20,11 +20,8 @@ function scenePointCloud = getScenePointCloud(sceneData,gridStep)
 % this file (or any portion of it) in your project.
 % ---------------------------------------------------------
 
-if strcmp(sceneData.env,'shelf')
-    viewBounds = [-0.01, 0.40; -0.17, 0.17; -0.06, 0.20];
-else
-    viewBounds = 0.53;
-end
+global binBounds;
+global tableBounds;
 
 if ~exist('gridStep','var')
     gridStep = 0.001;
@@ -59,12 +56,12 @@ for frameIdx = 1:numFrames
 
     if strcmp(sceneData.env,'shelf')
         % Remove out of bounds points (in bin coordinates)
-        ptsOutsideBounds = find((camPts(1,:) < viewBounds(1,1)) | (camPts(1,:) > viewBounds(1,2)) | ...
-                                (camPts(2,:) < viewBounds(2,1)) | (camPts(2,:) > viewBounds(2,2)) | ...
-                                (camPts(3,:) < viewBounds(3,1)) | (camPts(3,:) > viewBounds(3,2)));
+        ptsOutsideBounds = find((camPts(1,:) < binBounds(1,1)) | (camPts(1,:) > binBounds(1,2)) | ...
+                                (camPts(2,:) < binBounds(2,1)) | (camPts(2,:) > binBounds(2,2)) | ...
+                                (camPts(3,:) < binBounds(3,1)) | (camPts(3,:) > binBounds(3,2)));
     else
         % Remove points outside the TABLE
-        ptsOutsideBounds = find(camPts(3,:) < viewBounds);
+        ptsOutsideBounds = find(camPts(3,:) < tableBounds);
     end
 
     camPts(:,ptsOutsideBounds) = [];

@@ -1,19 +1,22 @@
 function runPhyTrimICP(init_pose, final_pose, objNames, objModels, sceneData, scenePath)
 
-gridStep = 0.002;
+global physicsIterations;
+global physicsstep;
+global finalstep;
+global gridStep;
+
 icpWorstRejRatio = 0.9;
 
 % Iterative Optimization : Vision and Physics
-numItr = 3;
 icp_factor = 1;
-for iter = 1:numItr
+for iter = 1:physicsIterations
     fprintf('Iteration : %d\n', iter);
 
     fprintf('[Processing] get Physics fix vector\n');
 
     t = tcpip('localhost',10000);
     fopen(t);
-    fprintf(t,'%d',5);
+    fprintf(t,'%d',physicsstep);
     fclose(t);
     
     t2 = tcpip('localhost', 40001, 'NetworkRole', 'server');
@@ -61,7 +64,7 @@ for iter = 1:numItr
             pclname = fullfile(scenePath, pclname);
             objSegCloud = pcread(pclname);
 
-            pclname = sprintf('rcnn-model-%s',name);
+            pclname = sprintf('rcnn-after-physics-%s',name);
             pclname = fullfile(scenePath, pclname);
             pcwrite(tmpObjModelCloud,pclname,'PLYFormat','binary');
 
@@ -102,7 +105,7 @@ fprintf('[Processing] Final Physics Fix\n');
 
 t = tcpip('localhost',10000);
 fopen(t);
-fprintf(t,'%d', 20);
+fprintf(t,'%d', finalstep);
 fclose(t);
 
 t2 = tcpip('localhost', 40001, 'NetworkRole', 'server');

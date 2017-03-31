@@ -102,7 +102,6 @@ sock.bind(server_address)
 # Listen for incoming connections
 sock.listen(1)
 
-
 iter_num = 1
 framesIter = 5
 
@@ -239,7 +238,6 @@ while True:
                                             objects[shape_file].matrix_world[2][3],
                                             sloc[0], sloc[1], sloc[2]))
 
-    
 
     # save to temp.blend
     # mainfile_path = os.path.join("rendered_images", "blend_%05d.blend" % iter_num)
