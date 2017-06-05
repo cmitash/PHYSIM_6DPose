@@ -22,8 +22,6 @@ function scenePointCloud = getScenePointCloud(sceneData,gridStep)
 
 global binBounds;
 global tableBounds;
-global sceneDepth;
-global useSceneOptimizer;
 
 if ~exist('gridStep','var')
     gridStep = 0.001;
@@ -35,7 +33,6 @@ for frameIdx = 1:numFrames
     colorFrame = sceneData.colorFrames{frameIdx};
     depthFrame = sceneData.depthFrames{frameIdx};
     extCam2World = sceneData.extCam2World{frameIdx};
-    extCam2Bin = sceneData.extWorld2Bin*extCam2World;
 
     % Project depth into camera space
     [pixX,pixY] = meshgrid(1:640,1:480);
@@ -48,26 +45,13 @@ for frameIdx = 1:numFrames
     camPts = [single(camX(validDepth)),single(camY(validDepth)),single(camZ(validDepth))]';
 
     % Convert to bin coordinate space
-    camPts = extCam2Bin(1:3,1:3) * camPts + repmat(extCam2Bin(1:3,4),1,size(camPts,2));
+    camPts = extCam2World(1:3,1:3) * camPts + repmat(extCam2World(1:3,4),1,size(camPts,2));
     
     % Get vertex colors
     colorR = colorFrame(:,:,1);
     colorG = colorFrame(:,:,2);
     colorB = colorFrame(:,:,3);
     colorPts = [colorR(validDepth),colorG(validDepth),colorB(validDepth)]';
-
-    if strcmp(sceneData.env,'shelf')
-        % Remove out of bounds points (in bin coordinates)
-        ptsOutsideBounds = find((camPts(1,:) < binBounds(1,1)) | (camPts(1,:) > binBounds(1,2)) | ...
-                                (camPts(2,:) < binBounds(2,1)) | (camPts(2,:) > binBounds(2,2)) | ...
-                                (camPts(3,:) < binBounds(3,1)) | (camPts(3,:) > binBounds(3,2)));
-    else
-        % Remove points outside the TABLE
-        ptsOutsideBounds = find(camPts(3,:) < tableBounds);
-    end
-
-    camPts(:,ptsOutsideBounds) = [];
-    colorPts(:,ptsOutsideBounds) = [];
 
     % Aggregate point clouds
     if frameIdx == 1
@@ -76,18 +60,7 @@ for frameIdx = 1:numFrames
       camPointCloud = pcmerge(camPointCloud,pointCloud(camPts','Color',colorPts'),gridStep);
     end
 end
-
 % Downsample point cloud
 scenePointCloud = pcdownsample(camPointCloud,'gridAverage',gridStep);
-
-% Store the depth map of segmented cloud; TODO: also store the color image of segmented cloud
-if useSceneOptimizer == 1
-    camPts = scenePointCloud.Location';
-    colorPts = scenePointCloud.Color';
-    extBin2Cam = inv(extCam2Bin);
-    camPts = extBin2Cam(1:3,1:3) * camPts + repmat(extBin2Cam(1:3,4),1,size(camPts,2));
-    sceneDepth = renderDepth(sceneData, camPts, '~/Desktop/scene.png');
-end
-
 end
 

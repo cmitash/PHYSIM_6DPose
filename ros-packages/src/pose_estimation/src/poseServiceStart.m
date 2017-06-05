@@ -105,21 +105,32 @@ global gridStep;
 global useBgCalib;
 global detThreshold;
 global debugOption;
+global useSceneOptimizer;
+global sceneDepth;
+global transOffset;
+global rotOffset;
 
-
-usePhysics = 1; % If you want to use physics in postprocessing
-physicsIterations = 1; % Number of iterations of physics and ICP that will be used
-physicsstep = 5; % Number of steps in each iteration of physics
-finalstep = 20; % Number of steps in final physics step
+% Generic
 SegMode = 'rcnn'; % choose between rcnn, fcn, gt (ground truth)
 InitPoseMode= 'super4pcs'; % choose between super4pcs, pca, fgr
 calibBin = 0; % Should be enabled for Princeton Dataset
-binBounds = [-0.01, 0.40; -0.17, 0.17; -0.06, 0.20]; % points outside this bound would be removed if using shelf
+binBounds = [-0.005, 0.40; -0.13, 0.11; -0.01, 0.20]; % points outside this bound would be removed if using shelf
 tableBounds = 0.528; % points below this bound would be removed if using table
 gridStep = 0.002; % grid size for downsampling point clouds
 useBgCalib = 1; % if you want to use background calibration of bin/table
 detThreshold = 0.3; % threshold on rcnn confidence to be considered as a correct detection
 debugOption = 1; % store intermediate point clouds
+
+% for PHYTrimICP
+usePhysics = 0; % If you want to use physics in postprocessing
+physicsIterations = 3; % Number of iterations of physics and ICP that will be used
+physicsstep = 5; % Number of steps in each iteration of physics
+finalstep = 20; % Number of steps in final physics step
+
+% for global search
+useSceneOptimizer = 0;
+transOffset = 0.02;
+rotOffset = 0.0872665; % radians for 5 degrees
 
 % Start ROS service
 server = rossvcserver('/pose_estimation', 'pose_estimation/EstimateObjectPose', @poseServiceIterative);

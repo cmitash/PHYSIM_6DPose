@@ -18,4 +18,4 @@ function writeDepth(depth,path)
 
 data = uint16(round(depth.*10000));
 data = bitor(bitshift(data,3),bitshift(data,-13));
-imwrite(data,fullfile(path));
+% imwrite(data,fullfile(path));

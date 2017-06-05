@@ -44,7 +44,8 @@ apc_objects_strs = [
   "scotch_duct_tape", "dasani_water_bottle", "jane_eyre_dvd",
   "up_glucose_bottle", "laugh_out_loud_joke_book", "soft_white_lightbulb",
   "kleenex_tissue_box", "ticonderoga_12_pencils", "dove_beauty_bar",
-  "dr_browns_bottle_brush", "elmers_washable_no_run_school_glue", "rawlings_baseball"
+  "dr_browns_bottle_brush", "elmers_washable_no_run_school_glue", "rawlings_baseball",
+  "command_hooks", "kyjen_squeakin_eggs_plush_puppies", "platinum_pets_dog_bowl", "cherokee_easy_tee_shirt"
 ];
 
 class detection:
@@ -104,7 +105,7 @@ if __name__ == '__main__':
     global caffemodel, prototxt
 
     caffemodel = os.path.join(cfg.DATA_DIR, 'faster_rcnn_models',
-                               'vgg_cnn_m_1024_faster_rcnn_iter_10000seed_3.caffemodel')
+                               'vgg_cnn_m_1024_faster_rcnn_iter_10000.caffemodel')
        
     prototxt = os.path.join(cfg.DATA_DIR, 'faster_rcnn_models',
                       'test.prototxt')

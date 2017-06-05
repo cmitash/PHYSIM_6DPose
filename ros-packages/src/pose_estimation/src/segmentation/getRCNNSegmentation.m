@@ -5,6 +5,13 @@ global useBgCalib;
 global detThreshold;
 global debugOption;
 
+% Calibrate the table/shelf
+backgroundPointCloud = 0;
+extBin2Bg = 0;
+if useBgCalib == 1
+    [extBin2Bg, backgroundPointCloud] = getExactEnvCalib(sceneData, scenePath);
+end
+
 % Call RCNN detector to do 2D object segmentation for each RGB-D frame
 active_list = zeros(1,size(sceneData.objects,2));
 for obIdx = 1:size(sceneData.objects,2)
@@ -25,13 +32,6 @@ end
 
 mkdir(fullfile(scenePath,'bbox_detections'));
 copyfile(fullfile(tmpDataPath,'bbox_detections','*'),fullfile(scenePath,'bbox_detections'));
-
-% Calibrate the table/shelf
-backgroundPointCloud = 0;
-extBin2Bg = 0;
-if useBgCalib == 1
-    [extBin2Bg, backgroundPointCloud] = getExactEnvCalib(sceneData, scenePath);
-end
 
 for obIdx = 1:size(sceneData.objects,2)
     maskFiles = dir(fullfile(tmpDataPath,'bbox_detections',sprintf('*.%s.mask.png',sceneData.objects{1,obIdx})));

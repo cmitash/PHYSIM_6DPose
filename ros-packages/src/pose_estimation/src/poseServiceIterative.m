@@ -9,6 +9,7 @@ global usePhysics;
 global SegMode;
 global InitPoseMode;
 global debugOption;
+global useSceneOptimizer;
 
 frames = [];
 
@@ -18,8 +19,9 @@ apc_objects_strs = containers.Map(...
   'scotch_duct_tape', 'dasani_water_bottle', 'jane_eyre_dvd',...
   'up_glucose_bottle', 'laugh_out_loud_joke_book', 'soft_white_lightbulb',...
   'kleenex_tissue_box', 'ticonderoga_12_pencils', 'dove_beauty_bar',...
-  'dr_browns_bottle_brush', 'elmers_washable_no_run_school_glue', 'rawlings_baseball'...
-},{1,2,3,4,5,6,7,8,9,10,11,12,13,14,15});
+  'dr_browns_bottle_brush', 'elmers_washable_no_run_school_glue', 'rawlings_baseball',...
+  'command_hooks', 'kyjen_squeakin_eggs_plush_puppies', 'platinum_pets_dog_bowl', 'cherokee_easy_tee_shirt'...
+},{1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19});
 
 % Path configurations
 repo_path = getenv('PHYSIM_6DPose_PATH');
@@ -72,9 +74,20 @@ if calibBin == 1
 end
 
 % Fill holes in depth frames for scene
+camposefile = fopen(fullfile(tmpDataPath,'cam_pose.txt'),'wt');
 for frameIdx = 1:length(sceneData.depthFrames)
     sceneData.depthFrames{frameIdx} = fillHoles(sceneData.depthFrames{frameIdx});
     frames = [frames,frameIdx];
+    campose = sceneData.extCam2World{frames(1,frameIdx)};
+    initrot1 = [-1,0,0; 0,1,0; 0,0,-1];
+    initrot2 = [-1,0,0; 0,-1,0; 0,0,1];
+    camrot = campose(1:3,1:3)*initrot1*initrot2;
+
+    fprintf(camposefile, '%f %f %f %f %f %f %f %f %f %f %f %f\n', ...
+                camrot(1,1), camrot(1,2), camrot(1,3), campose(1,4), ...
+                camrot(2,1), camrot(2,2), camrot(2,3), campose(2,4), ...
+                camrot(3,1), camrot(3,2), camrot(3,3), campose(3,4) ...
+            );
 end
 
 % Call Segmentaion module
@@ -91,7 +104,7 @@ allfp = fopen(allInitPose, 'wt');
 % Iterate over each Object in Scene
 for obIdx = 1:size(sceneData.objects,2)
     objName = sceneData.objects{obIdx};
-    % try
+    try
         % Read object segmented cloud, model data        
         pclname = sprintf('seg-no-color-%s.ply',objName);
         pclname = fullfile(scenePath, pclname);
@@ -115,6 +128,9 @@ for obIdx = 1:size(sceneData.objects,2)
         end
         fprintf('[Processing] Init Pose Done\n');
         
+        % bestpredObjPoseBin(1,4) = bestpredObjPoseBin(1,4) + 0.02;
+        % bestpredObjPoseBin(2,4) = bestpredObjPoseBin(2,4) + 0.02;
+
         predObjPoseWorld = sceneData.extBin2World * bestpredObjPoseBin;
 
         % Debug : visualize model points in transformed pose
@@ -146,16 +162,16 @@ for obIdx = 1:size(sceneData.objects,2)
                 predObjPoseWorld(3,1), predObjPoseWorld(3,2), predObjPoseWorld(3,3), predObjPoseWorld(3,4), ...
                 sceneData.extBin2World(1,4), sceneData.extBin2World(2,4), sceneData.extBin2World(3,4) ...
             );
-    % catch
-    %     fprintf('Returning default pose');
-    %     fprintf(allfp, '%s %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f\n', ...
-    %             objName, ...
-    %             1, 0, 0, 0, ...
-    %             0, 1, 0, 0, ...
-    %             0, 0, 1, 0, ...
-    %             sceneData.extBin2World(1,4), sceneData.extBin2World(2,4), sceneData.extBin2World(3,4) ...
-    %         );
-    % end
+    catch
+        fprintf('Returning default pose');
+        fprintf(allfp, '%s %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f\n', ...
+                objName, ...
+                1, 0, 0, 0, ...
+                0, 1, 0, 0, ...
+                0, 0, 1, 0, ...
+                sceneData.extBin2World(1,4), sceneData.extBin2World(2,4), sceneData.extBin2World(3,4) ...
+            );
+    end
 end
 fclose(allfp);
 copyfile(allInitPose,inPHYSIM);
@@ -164,11 +180,18 @@ copyfile(allInitPose,inPHYSIM);
 % Use physics to correct final poses. This uses local iterative optimization wrt to ICP and phyical consistency.
 if usePhysics == 1
     runPhyTrimICP(inPHYSIM, outPHYSIM, objNames, objModels, sceneData, scenePath);
-    [objNameR, val1, val2, val3, val4, ...
+    [objName, val1, val2, val3, val4, ...
      val5, val6, val7, val8, ...
      val9, val10, val11, val12, val13, val14, val15] = textread(outPHYSIM, '%s %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f\n');
 else
-    [objNameR, val1, val2, val3, val4, ...
+    [objName, val1, val2, val3, val4, ...
+     val5, val6, val7, val8, ...
+     val9, val10, val11, val12, val13, val14, val15] = textread(inPHYSIM, '%s %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f\n');
+end
+
+if useSceneOptimizer == 1
+    runSceneOptimizer(allInitPose, inPHYSIM, outPHYSIM, objNames, objModels, sceneData, scenePath);
+    [objName, val1, val2, val3, val4, ...
      val5, val6, val7, val8, ...
      val9, val10, val11, val12, val13, val14, val15] = textread(inPHYSIM, '%s %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f\n');
 end
@@ -192,12 +215,12 @@ for obIdx = 1:size(sceneData.objects,2)
     predObjPoseWorld(4,4) = 1;
 
     % Debug : visualize the pose after using physics
-    if usePhysics == 1 && debugOption == 1
+    if (usePhysics == 1 || useSceneOptimizer == 1) && (debugOption == 1)
         binpose = inv(sceneData.extBin2World) * predObjPoseWorld;
-        objName = sceneData.objects{obIdx};
-        objModel = objModels{find(ismember(objNames,objName))};
+        objNameR = sceneData.objects{obIdx};
+        objModel = objModels{find(ismember(objNames,objNameR))};
 
-        pclname = sprintf('after-physics-%s',objName);
+        pclname = sprintf('after-physics-%s',objNameR);
         pclname = fullfile(scenePath, pclname);
         poseT = zeros(4,4);
         quat = rotm2quat(binpose(1:3,1:3));
@@ -230,7 +253,7 @@ for obIdx = 1:size(sceneData.objects,2)
     CurobjectPose = rosmessage('pose_estimation/ObjectPose');
     CurobjectPose.Pose = poseMsg;
 
-    CurobjectPose.Label = char(objNameR{obIdx,1});
+    CurobjectPose.Label = char(objName{obIdx,1});
 
     respMsg.Objects = [respMsg.Objects; CurobjectPose];
 end
