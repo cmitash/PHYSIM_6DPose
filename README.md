@@ -15,7 +15,7 @@ Post-processing : ICP, Physics correction, PhyTrim ICP (Physics-ICP iterative re
 
 2. execute in matlab ```path-to-repo/ros-packages/src/pose_estimation/src/make.m```
 
-3. setup ```caffe``` for Faster-RCNN(https://github.com/rbgirshick/py-faster-rcnn)
+3. setup ```caffe``` for [Faster-RCNN](https://github.com/rbgirshick/py-faster-rcnn)
 
 4. setup ```caffe``` for [FCN](https://github.com/andyzeng/apc-vision-toolbox)
 
@@ -59,9 +59,9 @@ in case dependecies are not installed refer to Super4PCS [installation](https://
 
 4. run ```rosservice call /pose_estimation "path-to-tmp-directory" "path-to-calibration-folder"```
 
-### Run Pose Estimation on a demo scene
+### Run Pose Estimation on a real setup
 
-1. run ```robot.launch``` which publishes the realsense camera pose.
+1. run ```robot.launch``` (specific to Rutgers) which publishes the realsense camera pose.
 
 2. run ```rosrun marvin_convnet save_images _write_directory:="path-to-some-tmp-directory" _camera_service_name:="/realsense_camera"```
 
