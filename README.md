@@ -1,13 +1,5 @@
 ## PHYSIM_6DPose
-This tool performs 6DoF Pose estimation for shelf and table-top environments using multi-view RGB-D images.
-
-Methods you can chose from :-
-
-Object segmentation : RCNN, PHYSIM-RCNN (Self-Supervised), FCN
-
-Point Cloud registration : PCA, Super4PCS
-
-Post-processing : ICP, Physics correction, PhyTrim ICP (Physics-ICP iterative reasoning)
+This tool performs 6DoF Pose estimation for shelf and table-top environments using multi-view RGB-D images. You get the option to use [Faster-RCNN](https://github.com/rbgirshick/py-faster-rcnn) or [FCN](https://github.com/shelhamer/fcn.berkeleyvision.org) for object segmentation. It also gives option to use PCA and [Super4PCS](http://geometry.cs.ucl.ac.uk/projects/2014/super4PCS/) for computing pose estimates. Finally as a post processing one could chose from it performs ICP and physical reasoning (optional).
 
 ### Installation
 
