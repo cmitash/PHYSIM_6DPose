@@ -42,6 +42,7 @@ in case dependecies are not installed refer to Super4PCS [installation](https://
 ```export BLENDER_PATH=path to blender```
 
 ### Run Pose Estimation on a demo scene
+1. download rcnn model from this [webpage](http://paul.rutgers.edu/~cm1074/PHYSIM.html) and store it in ```$PHYSIM_6DPose_PATH/ros-packages/src/detection_package/data/faster_rcnn_models/```
 
 1. run ```cd $PHYSIM_6DPose_PATH```
 
