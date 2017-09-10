@@ -46,9 +46,8 @@ in case dependecies are not installed refer to Super4PCS [installation](https://
 16. run ```make```
 
 17. Add the following to ```~/.bashrc``` :-
-
-```export PHYSIM_6DPose_PATH=path to PHYSIM_6DPose repository
-export BLENDER_PATH=path to blender```
+```export PHYSIM_6DPose_PATH=path to PHYSIM_6DPose repository```
+```export BLENDER_PATH=path to blender```
 
 ### Run Pose Estimation on a demo scene
 
