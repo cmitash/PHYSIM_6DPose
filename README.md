@@ -1,74 +1,71 @@
-<snippet>
-  <content>
-# PHYSIM_6DPose
-6D Pose estimation for shelf and table-top environments.
+## PHYSIM_6DPose
+This tool performs 6DoF Pose estimation for shelf and table-top environments using multi-view RGB-D images. You get the option to use [Faster-RCNN](https://github.com/rbgirshick/py-faster-rcnn) or [FCN](https://github.com/shelhamer/fcn.berkeleyvision.org) for object segmentation. It also gives option to use PCA and [Super4PCS](http://geometry.cs.ucl.ac.uk/projects/2014/super4PCS/) for computing pose estimates. Finally as a post processing one could chose from it performs ICP and physical reasoning (optional).
 
-Methods you can chose from :-
+### Installation
 
-Object segmentation : RCNN, PHYSIM-RCNN (Self-Supervised), FCN
+1. install ```Matlab Robotics toolbox```
 
-Point Cloud registration : PCA, Super4PCS
+2. execute in matlab ```path-to-repo/ros-packages/src/pose_estimation/src/make.m```
 
-Post-processing : ICP, Physics correction, PhyTrim ICP (Physics-ICP iterative reasoning)
+3. setup ```caffe``` for [Faster-RCNN](https://github.com/rbgirshick/py-faster-rcnn)
 
-## Installation
+4. setup ```caffe``` for [FCN](https://github.com/andyzeng/apc-vision-toolbox)
 
-1) setup Matlab, Matlab Robotics toolbox 
+5. install [Blender](https://www.blender.org/features/releases/2-78/)
 
-2) run ros-packages/src/pose_estimation/src/make.m
+6. realsense camera [setup](https://github.com/IntelRealSense/librealsense/blob/master/doc/installation.md)
 
-2) setup caffe for RCNN according to : https://github.com/rbgirshick/py-faster-rcnn
+7. run ```cd path-to-repo/ros-packages/src```
 
-3) setup caffe for FCN according to : https://github.com/andyzeng/apc-vision-toolbox
+8. run ```catkin_init_workspace```
 
-4) install blender (if you wish to use physics or generate synthetic dataset)
+9. run ```cd ../```
 
-5) for realsense camera setup : https://github.com/IntelRealSense/librealsense/blob/master/doc/installation.md
+10. run ```catkin_make```
 
-6) run catkin_make in the workspace to compile
+11. run ```cd src/super4pcs```
 
-7) cd ros-packages/src/super4pcs
+12. run ```mkdir build && cd build```
 
-8) mkdir build && cd build
+13. run ```cmake -DCMAKE_BUILD_TYPE=Release -DANN_DIR=$PWD/../ann_1.1.2/ ..```
 
-9) cmake -DCMAKE_BUILD_TYPE=Release -DANN_DIR=$PWD/../ann_1.1.2/ ..
+14. run ```make```
 
-10) make
+in case dependecies are not installed refer to Super4PCS [installation](https://github.com/nmellado/Super4PCS/wiki/Compilation)
 
-11) this might require dependencies as in https://github.com/nmellado/Super4PCS/wiki/Compilation
+15. run ```cd path-to-repo/ros-packages/src/detection_package/lib```
 
-12) cd /home/pracsys/repos/pracsys_ws/src/PHYSIM_6DPose/ros-packages/src/detection_package/lib
+16. run ```make```
 
-13) make
+17. Add the following to ```~/.bashrc``` :-
+```export PHYSIM_6DPose_PATH=path to PHYSIM_6DPose repository```
+```export BLENDER_PATH=path to blender```
 
-14) Add the following to .bashrc :-
+### Run Pose Estimation on a demo scene
+1. download rcnn model from this [webpage](http://paul.rutgers.edu/~cm1074/PHYSIM.html) and store it in ```$PHYSIM_6DPose_PATH/ros-packages/src/detection_package/data/faster_rcnn_models/```
 
-export PHYSIM_6DPose_PATH=path to PHYSIM_6DPose repository
+1. run ```cd $PHYSIM_6DPose_PATH```
 
-source $PHYSIM_6DPose_PATH/ros-packages/devel/setup.sh
+2. run ```./runMaster.sh```
 
-export BLENDER_PATH=path to blender
+3. execute in matlab ```ros-packages/src/pose_estimation/src/poseServiceStart.m```
 
-## Usage
+4. run ```rosservice call /pose_estimation "path-to-tmp-directory" "path-to-calibration-folder"```
 
-1) start "robot.launch" which publishes the realsense camera pose. (staticTrans.txt in repository root has current camera pose)
+### Run Pose Estimation on a real setup
 
-2) run "./ros-packages/src/detection_package/bin/detect_bbox" (you would need the trained model)
+1. run ```robot.launch``` (specific to Rutgers) which publishes the realsense camera pose.
 
-3) start matlab and run "ros-packages/src/pose_estimation/src/poseServiceStart.m"
+2. run ```rosrun marvin_convnet save_images _write_directory:="path-to-some-tmp-directory" _camera_service_name:="/realsense_camera"```
 
-4) rosrun marvin_convnet save_images _write_directory:="path-to-some-tmp-directory" _camera_service_name:="/realsense_camera"
+3. run ```rosservice call /save_images ["expo_dry_erase_board_eraser","other-object-names"] binId frameId``` (for table top you can use 13 as the ```bin id``` and for shelf from ```1-12```)
 
-5) rosservice call /save_images ["expo_dry_erase_board_eraser","other-object-names"] binId frameId (for table top you can use 13 as the bin id, and for shelf from 1-12)
+4. run ```rosservice call /pose_estimation "path-to-tmp-directory" "path-to-calibration-folder"```
 
-6) rosservice call /pose_estimation "path-to-tmp-directory" "path-to-calibration-folder"
+### References 
 
-## References 
+1. [Multi-view Self-supervised Deep Learning for 6D Pose Estimation in the Amazon Picking Challenge](http://apc.cs.princeton.edu/) : Andy Zeng, Kuan-Ting Yu, Shuran Song, Daniel Suo, Ed Walker Jr., Alberto Rodriguez and Jianxiong Xiao 
 
-1) Multi-view Self-supervised Deep Learning for 6D Pose Estimation in the Amazon Picking Challenge : Andy Zeng, Kuan-Ting Yu, Shuran Song, Daniel Suo, Ed Walker Jr., Alberto Rodriguez and Jianxiong Xiao (http://apc.cs.princeton.edu/)
+2. [Super4PCS: Fast Global Pointcloud Registration via Smart Indexing](http://geometry.cs.ucl.ac.uk/projects/2014/super4PCS/) : Mellado, Nicolas and Aiger, Dror and Mitra, Niloy J. 
 
-2) Super4PCS: Fast Global Pointcloud Registration via Smart Indexing : Mellado, Nicolas and Aiger, Dror and Mitra, Niloy J. (http://geometry.cs.ucl.ac.uk/projects/2014/super4PCS/)
-
-3) Fast Global registration : Qian-Yi Zhou, Jaesik Park, and Vladlen Koltun (http://vladlen.info/publications/fast-global-registration/)
-</content>
-</snippet>
+3. [Fast Global registration](http://vladlen.info/publications/fast-global-registration/): Qian-Yi Zhou, Jaesik Park, and Vladlen Koltun 
